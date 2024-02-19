@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbx8v44fbyor4"]
+
+[ext_resource type="Script" path="res://common/scenes/entity/entity.gd" id="1_01yp4"]
+
+[node name="Entity" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_01yp4")

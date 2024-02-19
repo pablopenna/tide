@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbw4tsjsf6vop"]
+
+[ext_resource type="PackedScene" uid="uid://ua7jd2ypjd03" path="res://scenes/terrain.tscn" id="1_rj2xm"]
+[ext_resource type="PackedScene" uid="uid://cmxyconummrk8" path="res://scenes/player.tscn" id="2_e07p2"]
+[ext_resource type="PackedScene" uid="uid://dg0wodn064gs2" path="res://scenes/follower_camera/follower_camera.tscn" id="3_etrod"]
+
+[node name="debug_scene" type="Node2D"]
+
+[node name="Terrain" parent="." instance=ExtResource("1_rj2xm")]
+
+[node name="FollowerCamera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_etrod")]
+target = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("2_e07p2")]

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxh2khy3nyldc"]
+
+[ext_resource type="Script" path="res://scenes/fps_counter/fps_counter.gd" id="1_fyt1u"]
+
+[node name="FPS_Counter" type="RichTextLabel"]
+offset_right = 40.0
+offset_bottom = 40.0
+bbcode_enabled = true
+fit_content = true
+script = ExtResource("1_fyt1u")
