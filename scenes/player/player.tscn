@@ -26,4 +26,4 @@ managed_entity = NodePath("..")
 
 [node name="default" type="Node" parent="StateMachine"]
 script = ExtResource("4_etbcj")
-speed = 100.0
+speed = 300.0
