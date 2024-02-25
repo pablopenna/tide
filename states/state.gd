@@ -9,11 +9,11 @@ var state_name: String
 func enter():
 	pass
 	
-func process(delta):
+func process(_delta):
 	pass
 	
-func physics_process(delta):
+func physics_process(_delta):
 	pass
 	
-func exit(new_state: State):
+func exit(_new_state: State):
 	pass

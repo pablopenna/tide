@@ -17,10 +17,10 @@ func _process(delta):
 func ready():
 	pass
 
-func physics_process(delta):
+func physics_process(_delta):
 	pass
 	
-func process(delta):
+func process(_delta):
 	pass
 	
 func _update_facing_direction():
