@@ -12,3 +12,4 @@
 target = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("2_e07p2")]
+position = Vector2(256, 97)
