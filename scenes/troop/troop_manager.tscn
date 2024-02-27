@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b07yhuwx4dkdn"]
+
+[ext_resource type="Script" path="res://scenes/troop/troop_manager.gd" id="1_xf0ym"]
+[ext_resource type="PackedScene" uid="uid://clindq3qmowxv" path="res://scenes/troop/troop.tscn" id="2_g31bs"]
+
+[node name="TroopManager" type="Node"]
+script = ExtResource("1_xf0ym")
+generated_troops_layer = 4
+troop_scene = ExtResource("2_g31bs")

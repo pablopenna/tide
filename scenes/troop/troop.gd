@@ -1,13 +1,9 @@
-extends Entity
+class_name Troop extends Entity
 
 @export var entity_to_follow: Entity
 var target_position_offset: Vector2
 const TARGET_POSITION_ACCEPTED_DISTANCE: float = 1
-@export var speed: float = 50
-
-func ready():
-	# TODO: make it auto by a factory
-	target_position_offset = Vector2(10, 10)
+var speed: float
 	
 func process(_delta):
 	if _should_move_to_target_position():
