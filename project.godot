@@ -18,6 +18,7 @@ config/icon="res://tide-icon.png"
 [autoload]
 
 FpsCounter="*res://scenes/fps_counter/fps_counter.tscn"
+PhysicsLayersNamesUtils="*res://utils/physics_layers_names_utils.gd"
 
 [editor_plugins]
 
@@ -37,3 +38,9 @@ add_player_troop={
 2d_physics/layer_2="environment"
 2d_physics/layer_3="ally"
 2d_physics/layer_4="enemy"
+2d_physics/layer_5="player_hitbox"
+2d_physics/layer_6="ally_hitbox"
+2d_physics/layer_7="enemy_hitbox"
+2d_physics/layer_8="player_hurtbox"
+2d_physics/layer_9="ally_hurtbox"
+2d_physics/layer_10="enemy_hurtbox"

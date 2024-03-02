@@ -4,9 +4,11 @@ extends Node # To be set as a global script as it needs to initialize
 const PLAYER = "player"
 const ENVIRONMENT = "environment"
 const ENEMY = "enemy"
-const PLAYER_ATTACK = "player_hitbox"
-const ENEMY_ATTACK = "enemy_hitbox"
+const PLAYER_HITBOX = "player_hitbox"
+const ALLY_HITBOX = "ally_hitbox"
+const ENEMY_HITBOX = "enemy_hitbox"
 const PLAYER_HURTBOX = "player_hurtbox"
+const ALLY_HURTBOX = "ally_hurtbox"
 const ENEMY_HURTBOX = "enemy_hurtbox"
 #endregion
 

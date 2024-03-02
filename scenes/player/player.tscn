@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/entity/entity.gd" id="1_0lhsi"]
 [ext_resource type="Texture2D" uid="uid://dixmbr8nug28q" path="res://sprites/player.png" id="1_2o7nc"]
 [ext_resource type="Script" path="res://states/state_manager.gd" id="3_3uexm"]
-[ext_resource type="Script" path="res://scenes/player/default_state.gd" id="4_etbcj"]
+[ext_resource type="Script" path="res://scenes/player/states/default_state.gd" id="4_etbcj"]
 [ext_resource type="PackedScene" uid="uid://b07yhuwx4dkdn" path="res://scenes/troop/troop_manager.tscn" id="5_53p1u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_od5lt"]

@@ -14,6 +14,5 @@ func process(_delta):
 	
 	if Input.is_action_just_pressed("add_player_troop"):
 		troop_manager.create_troop()
-
-func physics_process(_delta):
+	
 	managed_entity.velocity = input * speed
