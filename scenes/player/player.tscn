@@ -1,18 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://cmxyconummrk8"]
+[gd_scene load_steps=9 format=3 uid="uid://cmxyconummrk8"]
 
-[ext_resource type="Script" path="res://scenes/entity/entity.gd" id="1_0lhsi"]
 [ext_resource type="Texture2D" uid="uid://dixmbr8nug28q" path="res://sprites/player.png" id="1_2o7nc"]
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_n50c0"]
 [ext_resource type="Script" path="res://states/state_manager.gd" id="3_3uexm"]
 [ext_resource type="Script" path="res://scenes/player/states/default_state.gd" id="4_etbcj"]
 [ext_resource type="PackedScene" uid="uid://b07yhuwx4dkdn" path="res://scenes/troop/troop_manager.tscn" id="5_53p1u"]
+[ext_resource type="Script" path="res://scenes/player/EnemyDetector.gd" id="6_cxg56"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_od5lt"]
 size = Vector2(16, 16)
 
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_b60p5"]
+points = PackedVector2Array(100, -30, 100, 30, 0, 0)
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 2
 motion_mode = 1
-script = ExtResource("1_0lhsi")
+script = ExtResource("1_n50c0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_od5lt")
@@ -32,3 +36,14 @@ troop_manager = NodePath("../../TroopManager")
 
 [node name="TroopManager" parent="." node_paths=PackedStringArray("troop_owner") instance=ExtResource("5_53p1u")]
 troop_owner = NodePath("..")
+
+[node name="EnemyDetector" type="ShapeCast2D" parent="." node_paths=PackedStringArray("owner_entity")]
+shape = SubResource("ConvexPolygonShape2D_b60p5")
+target_position = Vector2(0, 0)
+collision_mask = 512
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource("6_cxg56")
+owner_entity = NodePath("..")
+
+[connection signal="targets_acquired" from="EnemyDetector" to="StateMachine/default" method="_on_enemy_detector_targets_acquired"]

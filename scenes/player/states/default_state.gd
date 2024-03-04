@@ -11,8 +11,16 @@ func _ready():
 func process(_delta):
 	var raw_input: Vector2 = Vector2(Input.get_axis("ui_left","ui_right"), Input.get_axis("ui_up","ui_down"))
 	input = raw_input.normalized()
+	managed_entity.velocity = input * speed
 	
 	if Input.is_action_just_pressed("add_player_troop"):
 		troop_manager.create_troop()
-	
-	managed_entity.velocity = input * speed
+		
+	if Input.is_action_just_pressed("attack"):
+		print("command_attack")
+
+func _on_enemy_detector_targets_acquired(target_hurtbox):
+	_attack_targets(target_hurtbox)
+
+func _attack_targets(targets: Array):
+	troop_manager.attack_targets(targets)

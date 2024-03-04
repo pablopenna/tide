@@ -21,11 +21,10 @@ func create_troop():
 	new_troop.owner_entity = troop_owner
 	new_troop.target_position_offset = _generate_troop_offset()
 	new_troop.speed = _rng.randf_range(MIN_TROOP_SPPEED, MAX_TROOP_SPPEED)
+	new_troop.position = troop_owner.position + new_troop.target_position_offset
 	
+	_troops.append(new_troop)
 	add_child(new_troop)
-	
-	# Need to call it after add_child so that the troop_entity field is initialized (because it is init'd within _ready)
-	new_troop.troop_entity.position = troop_owner.position + new_troop.target_position_offset
 	
 func _get_number_of_troops():
 	return len(_troops)
@@ -34,3 +33,8 @@ func _generate_troop_offset():
 	var random_x = _rng.randf_range(_troop_spread_radius * -1, _troop_spread_radius)
 	var random_y = _rng.randf_range(_troop_spread_radius * -1, _troop_spread_radius)
 	return Vector2(random_x, random_y)
+	
+func attack_targets(targets: Array):
+	var target = targets[0]
+	for troop in _troops:
+		troop.attack_target(target)

@@ -1,5 +1,7 @@
 class_name FacingDirectionUtils
 
+# We are using Vector2.RIGHT,LEFT,UP,DOWN as the facing directions instead of creating an enum
+
 static func getFacingDirectionFromVelocityWithDefault(velocity: Vector2, defaultWhenVelocityIsZero: Vector2):
 	if velocity.y != 0:
 		return Vector2.UP if velocity.y < 0 else Vector2.DOWN

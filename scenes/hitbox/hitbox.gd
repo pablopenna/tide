@@ -1,6 +1,6 @@
 class_name Hitbox extends Area2D
 
-var entity_to_track: Entity
+@export var entity_to_track: Entity
 var hitbox_data: HitboxData
 
 func _ready():
@@ -30,10 +30,10 @@ func _on_hurtbox_entered(hurtbox: Hurtbox):
 	hurtbox.receiveDamage(hitbox_data)
 	
 func _flip_horizontally_if_entity_facing_left():
-	if entity_to_track.facing_direction == FacingDirectionUtils.FacingDirection.LEFT:
+	if entity_to_track.facing_direction == Vector2.LEFT:
 		self.scale.x = -1
 	else:
 		self.scale.x = 1
 		
 func _set_position_relative_to_entity():
-	self.position = entity_to_track.position
+	self.global_position = entity_to_track.global_position

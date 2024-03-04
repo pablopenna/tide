@@ -2,8 +2,6 @@ class_name Hurtbox extends Area2D
 
 signal damaged
 
-@export var linked_entity: Entity
-
 @export_flags_2d_physics var hurtbox_collision_layer
 # the hurtbox will not scan, it will be passive. The hitbox is in charge of 
 # detecting and triggering the hurtbox when they collision

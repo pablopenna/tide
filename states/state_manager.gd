@@ -12,7 +12,6 @@ func _ready():
 	initialize_states()
 	current_state = initial_state
 	
-
 func _process(delta):
 	current_state.process(delta)
 

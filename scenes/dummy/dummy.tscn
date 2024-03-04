@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://c3keum6uonp7t"]
+
+[ext_resource type="Script" path="res://scenes/dummy/dummy.gd" id="1_72h5p"]
+[ext_resource type="Texture2D" uid="uid://di0boo8jtpvth" path="res://sprites/enemy.png" id="2_8scon"]
+[ext_resource type="PackedScene" uid="uid://m4h80v367bd7" path="res://scenes/hurtbox/hurtbox.tscn" id="3_v03rl"]
+[ext_resource type="Script" path="res://states/state_manager.gd" id="4_k16vv"]
+[ext_resource type="Script" path="res://scenes/dummy/states/default_state.gd" id="5_xe6dm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_14asu"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_006gr"]
+size = Vector2(16, 16)
+
+[node name="Dummy" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("1_72h5p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_14asu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_8scon")
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_v03rl")]
+collision_layer = 512
+hurtbox_collision_layer = 512
+show_debug_label = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_006gr")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "managed_entity")]
+script = ExtResource("4_k16vv")
+initial_state = NodePath("Default")
+managed_entity = NodePath("..")
+
+[node name="Default" type="Node" parent="StateMachine"]
+script = ExtResource("5_xe6dm")
+
+[connection signal="damaged" from="Hurtbox" to="StateMachine/Default" method="_on_hurtbox_damaged"]

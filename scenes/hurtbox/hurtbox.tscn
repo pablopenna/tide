@@ -1,12 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://m4h80v367bd7"]
 
-[ext_resource type="Script" path="res://common/scenes/hurtbox/hurtbox.gd" id="1_g6x8f"]
+[ext_resource type="Script" path="res://scenes/hurtbox/hurtbox.gd" id="1_g6x8f"]
 
 [node name="Hurtbox" type="Area2D"]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_g6x8f")
-hitbox_collision_layer = 0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = -55.0

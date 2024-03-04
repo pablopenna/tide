@@ -3,8 +3,8 @@ extends State
 const TARGET_POSITION_ACCEPTED_DISTANCE: float = 1
 
 func _ready():
-	state_name = "follow"
-	
+	state_name = "attack"
+
 func process(_delta):
 	if _should_move_to_target_position():
 		managed_entity.velocity = _get_target_direction() * managed_entity.speed
@@ -12,7 +12,7 @@ func process(_delta):
 		managed_entity.velocity = Vector2.ZERO
 
 func _get_target_position() -> Vector2:
-	return managed_entity.owner_entity.position + managed_entity.target_position_offset
+	return managed_entity.current_target.global_position
 
 func _get_target_direction() -> Vector2:
 	return managed_entity.position.direction_to(_get_target_position())
@@ -23,6 +23,3 @@ func _get_distance_to_target_position() -> float:
 
 func _should_move_to_target_position() -> bool:
 	return _get_distance_to_target_position() >= TARGET_POSITION_ACCEPTED_DISTANCE
-
-func _on_troop_ordered_to_attack_target():
-	change_to_state.emit("attack")
