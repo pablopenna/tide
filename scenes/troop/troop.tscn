@@ -50,4 +50,5 @@ damage = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_ch1o1")
 
-[connection signal="ordered_to_attack_target" from="." to="StateMachine/Follow" method="_on_troop_ordered_to_attack_target"]
+[connection signal="attacked_target" from="." to="StateMachine/Follow" method="_on_troop_attacked_target"]
+[connection signal="followed_owner" from="." to="StateMachine/Attack" method="_on_troop_followed_owner"]

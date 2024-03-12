@@ -24,5 +24,5 @@ func _get_distance_to_target_position() -> float:
 func _should_move_to_target_position() -> bool:
 	return _get_distance_to_target_position() >= TARGET_POSITION_ACCEPTED_DISTANCE
 
-func _on_troop_ordered_to_attack_target():
+func _on_troop_attacked_target():
 	change_to_state.emit("attack")

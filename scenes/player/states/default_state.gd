@@ -17,10 +17,7 @@ func process(_delta):
 		troop_manager.create_troop()
 		
 	if Input.is_action_just_pressed("attack"):
-		print("command_attack")
+		troop_manager.make_troops_follow_leader()
 
 func _on_enemy_detector_targets_acquired(target_hurtbox):
-	_attack_targets(target_hurtbox)
-
-func _attack_targets(targets: Array):
-	troop_manager.attack_targets(targets)
+	troop_manager.make_troops_attack_targets(target_hurtbox)

@@ -9,11 +9,14 @@ var _troop_spread_radius
 const DEFAULT_TROOP_SPREAD_RADIUS = 50
 const MIN_TROOP_SPPEED = 40
 const MAX_TROOP_SPPEED = 80
-var _rng 
+var _rng
+const uuid_util = preload('res://addons/uuid/uuid.gd')
+var _unique_group_id
 
 func _ready():
 	_rng = RandomNumberGenerator.new()
 	_troop_spread_radius = DEFAULT_TROOP_SPREAD_RADIUS
+	_unique_group_id = uuid_util.v4()
 
 func create_troop():
 	var new_troop: Troop = troop_scene.instantiate()
@@ -34,7 +37,11 @@ func _generate_troop_offset():
 	var random_y = _rng.randf_range(_troop_spread_radius * -1, _troop_spread_radius)
 	return Vector2(random_x, random_y)
 	
-func attack_targets(targets: Array):
+func make_troops_attack_targets(targets: Array):
 	var target = targets[0]
 	for troop in _troops:
 		troop.attack_target(target)
+		
+func make_troops_follow_leader():
+	for troop in _troops:
+		troop.follow_owner()
