@@ -1,9 +1,14 @@
 extends State
 
 const TARGET_POSITION_ACCEPTED_DISTANCE: float = 1
+var target: Node2D
 
 func _ready():
 	state_name = "follow"
+	
+func enter(context):
+	if context.get('target'):
+		target = context.get('target')
 	
 func process(_delta):
 	if _should_move_to_target_position():
@@ -11,8 +16,13 @@ func process(_delta):
 	else:
 		managed_entity.velocity = Vector2.ZERO
 
+func _get_target() -> Node2D:
+	if target:
+		return target
+	return managed_entity.owner_entity
+
 func _get_target_position() -> Vector2:
-	return managed_entity.owner_entity.position + managed_entity.target_position_offset
+	return _get_target().position + managed_entity.target_position_offset
 
 func _get_target_direction() -> Vector2:
 	return managed_entity.position.direction_to(_get_target_position())
@@ -24,5 +34,5 @@ func _get_distance_to_target_position() -> float:
 func _should_move_to_target_position() -> bool:
 	return _get_distance_to_target_position() >= TARGET_POSITION_ACCEPTED_DISTANCE
 
-func _on_troop_attacked_target():
-	change_to_state.emit("attack")
+func _on_troop_ordered_to_attack_target(target):
+	change_to_state.emit("attack", {'target': target})

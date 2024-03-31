@@ -5,7 +5,7 @@ var current_state: State = initial_state
 @export var initial_state: State
 @export var managed_entity: Entity
 
-signal state_changed(new_state: String, old_state: String)
+signal state_changed(new_state: String, old_state: String, context: Dictionary)
 
 func _ready():
 	states = get_children_as_state_dictionary()
@@ -34,12 +34,12 @@ func initialize_states():
 		state.change_to_state.connect(on_change_to_state)
 		state.managed_entity = self.managed_entity
 
-func on_change_to_state(new_state_name: String):
+func on_change_to_state(new_state_name: String, context: Dictionary):
 	var old_state = current_state
 	var new_state = states[new_state_name]
 	
 	old_state.exit(new_state)
 	current_state = new_state
-	new_state.enter()
+	new_state.enter(context)
 	
-	state_changed.emit(new_state_name, old_state.state_name)
+	state_changed.emit(new_state_name, old_state.state_name, context)

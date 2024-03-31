@@ -4,13 +4,11 @@ var owner_entity: Entity
 var target_position_offset: Vector2
 var speed: float
 
-signal followed_owner()
-signal attacked_target()
-var current_target: Node2D
+signal ordered_to_follow_owner(owner: Entity)
+signal ordered_to_attack_target(target: Node2D)
 
 func attack_target(target: Node2D):
-	current_target = target
-	attacked_target.emit()
+	ordered_to_attack_target.emit(target)
 	
 func follow_owner():
-	followed_owner.emit()
+	ordered_to_follow_owner.emit(owner_entity)
