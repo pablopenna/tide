@@ -10,13 +10,10 @@ const DEFAULT_TROOP_SPREAD_RADIUS = 50
 const MIN_TROOP_SPPEED = 40
 const MAX_TROOP_SPPEED = 80
 var _rng
-const uuid_util = preload('res://addons/uuid/uuid.gd')
-var _unique_group_id
 
 func _ready():
 	_rng = RandomNumberGenerator.new()
 	_troop_spread_radius = DEFAULT_TROOP_SPREAD_RADIUS
-	_unique_group_id = uuid_util.v4()
 
 func create_troop():
 	var new_troop: Troop = troop_scene.instantiate()
