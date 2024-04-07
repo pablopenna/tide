@@ -5,5 +5,4 @@
 
 [node name="TroopManager" type="Node"]
 script = ExtResource("1_xf0ym")
-generated_troops_layer = 4
 troop_scene = ExtResource("2_g31bs")

@@ -19,5 +19,5 @@ func set_hurtbox_layer(layer: int):
 func set_hitbox_layer(layer: int):
 	$Hitbox.collision_mask = layer
 
-func _on_hurtbox_damaged():
+func _on_hurtbox_damaged(_hitboxData):
 	queue_free()

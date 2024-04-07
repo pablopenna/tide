@@ -1,7 +1,6 @@
 class_name TroopManager extends Node
 
 @export var troop_owner: Entity
-@export_flags_2d_physics var generated_troops_layer
 @export var troop_scene: PackedScene
 @export_flags_2d_physics var troops_hitbox_layer_scanned
 @export_flags_2d_physics var troops_hurtbox_layer

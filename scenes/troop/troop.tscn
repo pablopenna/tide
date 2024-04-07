@@ -55,6 +55,7 @@ damage = 1
 shape = SubResource("CircleShape2D_ch1o1")
 
 [node name="Hurtbox" parent="." instance=ExtResource("8_cumvf")]
+show_debug_label = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("RectangleShape2D_y572c")

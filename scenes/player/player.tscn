@@ -14,7 +14,7 @@ size = Vector2(16, 16)
 points = PackedVector2Array(100, -30, 100, 30, 0, 0)
 
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 2
+collision_mask = 10
 motion_mode = 1
 script = ExtResource("1_n50c0")
 

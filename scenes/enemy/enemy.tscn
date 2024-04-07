@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://ctixulb3yg747"]
+
+[ext_resource type="Script" path="res://scenes/enemy/enemy.gd" id="1_5m6ue"]
+[ext_resource type="Texture2D" uid="uid://di0boo8jtpvth" path="res://sprites/enemy.png" id="2_ja4re"]
+[ext_resource type="PackedScene" uid="uid://b07yhuwx4dkdn" path="res://scenes/troop/troop_manager.tscn" id="3_oby0l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_10huh"]
+size = Vector2(16, 16)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_5m6ue")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_10huh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ja4re")
+
+[node name="TroopManager" parent="." node_paths=PackedStringArray("troop_owner") instance=ExtResource("3_oby0l")]
+troop_owner = NodePath("..")
+troops_hitbox_layer_scanned = 256
+troops_hurtbox_layer = 512

@@ -10,6 +10,11 @@ func enter(context: Dictionary):
 	target = context.get('target')
 
 func process(_delta):
+	### After killing target (and they queue_free()), it will be null
+	if target == null: 
+		change_to_state.emit("follow", {})
+		return
+		
 	if _should_move_to_target_position():
 		managed_entity.velocity = _get_target_direction() * managed_entity.speed
 	else:
