@@ -1,9 +1,11 @@
+# The hitbox scans for hurtboxes by setting its mask to match the layer the hurtboxes are in
+# We can set the layer of the hitbox so it can be detected by other collisions
 class_name Hitbox extends Area2D
 
 @export var entity_to_track: Entity
 var hitbox_data: HitboxData
 
-func _ready():
+func _ready(): 
 	area_entered.connect(_on_area_entered)
 	hitbox_data = find_children("*", "HitboxData")[0]
 	

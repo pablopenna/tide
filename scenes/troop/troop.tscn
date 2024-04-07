@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://clindq3qmowxv"]
+[gd_scene load_steps=12 format=3 uid="uid://clindq3qmowxv"]
 
 [ext_resource type="Script" path="res://scenes/troop/troop.gd" id="1_tv7vu"]
 [ext_resource type="Texture2D" uid="uid://bq8np3qusaakl" path="res://sprites/troop.png" id="2_tqwij"]
@@ -7,12 +7,16 @@
 [ext_resource type="Script" path="res://scenes/troop/states/attack.gd" id="5_f1627"]
 [ext_resource type="Script" path="res://scenes/hitbox/hitbox.gd" id="6_3mp4b"]
 [ext_resource type="Script" path="res://scenes/hitbox/hitbox_data.gd" id="7_1fw48"]
+[ext_resource type="PackedScene" uid="uid://m4h80v367bd7" path="res://scenes/hurtbox/hurtbox.tscn" id="8_cumvf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i84y6"]
 size = Vector2(16, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ch1o1"]
 radius = 14.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y572c"]
+size = Vector2(16, 16)
 
 [node name="Troop" type="CharacterBody2D"]
 collision_layer = 0
@@ -37,18 +41,24 @@ script = ExtResource("4_5g1fc")
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("5_f1627")
 
-[node name="Area2D" type="Area2D" parent="." node_paths=PackedStringArray("entity_to_track")]
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("entity_to_track")]
 collision_layer = 16
 collision_mask = 512
 script = ExtResource("6_3mp4b")
 entity_to_track = NodePath("..")
 
-[node name="HitboxData" type="Node" parent="Area2D"]
+[node name="HitboxData" type="Node" parent="Hitbox"]
 script = ExtResource("7_1fw48")
 damage = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_ch1o1")
+
+[node name="Hurtbox" parent="." instance=ExtResource("8_cumvf")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_y572c")
 
 [connection signal="ordered_to_attack_target" from="." to="StateMachine/Follow" method="_on_troop_ordered_to_attack_target"]
 [connection signal="ordered_to_follow_owner" from="." to="StateMachine/Attack" method="_on_troop_ordered_to_follow_owner"]
+[connection signal="damaged" from="Hurtbox" to="." method="_on_hurtbox_damaged"]

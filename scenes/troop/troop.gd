@@ -12,3 +12,12 @@ func attack_target(target: Node2D):
 	
 func follow_owner():
 	ordered_to_follow_owner.emit(owner_entity)
+
+func set_hurtbox_layer(layer: int):
+	$Hurtbox.collision_layer = layer
+	
+func set_hitbox_layer(layer: int):
+	$Hitbox.collision_mask = layer
+
+func _on_hurtbox_damaged():
+	queue_free()

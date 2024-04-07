@@ -3,6 +3,8 @@ class_name TroopManager extends Node
 @export var troop_owner: Entity
 @export_flags_2d_physics var generated_troops_layer
 @export var troop_scene: PackedScene
+@export_flags_2d_physics var troops_hitbox_layer_scanned
+@export_flags_2d_physics var troops_hurtbox_layer
 
 var _troops: Array[Troop]
 var _troop_spread_radius
@@ -22,6 +24,8 @@ func create_troop():
 	new_troop.target_position_offset = _generate_troop_offset()
 	new_troop.speed = _rng.randf_range(MIN_TROOP_SPPEED, MAX_TROOP_SPPEED)
 	new_troop.position = troop_owner.position + new_troop.target_position_offset
+	new_troop.set_hitbox_layer(troops_hitbox_layer_scanned)
+	new_troop.set_hurtbox_layer(troops_hurtbox_layer)
 	
 	_troops.append(new_troop)
 	add_child(new_troop)

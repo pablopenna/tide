@@ -26,7 +26,6 @@ texture = ExtResource("2_8scon")
 
 [node name="Hurtbox" parent="." instance=ExtResource("3_v03rl")]
 collision_layer = 512
-hurtbox_collision_layer = 512
 show_debug_label = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]

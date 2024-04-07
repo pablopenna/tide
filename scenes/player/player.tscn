@@ -36,6 +36,8 @@ troop_manager = NodePath("../../TroopManager")
 
 [node name="TroopManager" parent="." node_paths=PackedStringArray("troop_owner") instance=ExtResource("5_53p1u")]
 troop_owner = NodePath("..")
+troops_hitbox_layer_scanned = 512
+troops_hurtbox_layer = 32
 
 [node name="EnemyDetector" type="ShapeCast2D" parent="." node_paths=PackedStringArray("owner_entity")]
 shape = SubResource("ConvexPolygonShape2D_b60p5")
