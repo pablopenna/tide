@@ -5,13 +5,11 @@
 [ext_resource type="Script" path="res://states/state_manager.gd" id="3_3uexm"]
 [ext_resource type="Script" path="res://scenes/player/states/default_state.gd" id="4_etbcj"]
 [ext_resource type="PackedScene" uid="uid://b07yhuwx4dkdn" path="res://scenes/troop/troop_manager.tscn" id="5_53p1u"]
-[ext_resource type="Script" path="res://scenes/player/EnemyDetector.gd" id="6_cxg56"]
+[ext_resource type="PackedScene" uid="uid://dfemqxgdpiugb" path="res://scenes/troop_detector/troop_detector.tscn" id="6_r46j7"]
+[ext_resource type="Shape2D" uid="uid://cwk0rjafs6j5e" path="res://scenes/troop_detector/cone.tres" id="7_gg1ut"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_od5lt"]
 size = Vector2(16, 16)
-
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_b60p5"]
-points = PackedVector2Array(100, -30, 100, 30, 0, 0)
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 10
@@ -34,18 +32,13 @@ script = ExtResource("4_etbcj")
 speed = 300.0
 troop_manager = NodePath("../../TroopManager")
 
-[node name="TroopManager" parent="." node_paths=PackedStringArray("troop_owner") instance=ExtResource("5_53p1u")]
+[node name="TroopManager" parent="." node_paths=PackedStringArray("troop_owner", "troop_detector") instance=ExtResource("5_53p1u")]
 troop_owner = NodePath("..")
 troops_hitbox_layer_scanned = 512
-troops_hurtbox_layer = 32
+troops_hurtbox_layer = 256
+troop_detector = NodePath("../TroopDetector")
 
-[node name="EnemyDetector" type="ShapeCast2D" parent="." node_paths=PackedStringArray("owner_entity")]
-shape = SubResource("ConvexPolygonShape2D_b60p5")
-target_position = Vector2(0, 0)
+[node name="TroopDetector" parent="." node_paths=PackedStringArray("owner_entity") instance=ExtResource("6_r46j7")]
+shape = ExtResource("7_gg1ut")
 collision_mask = 512
-collide_with_areas = true
-collide_with_bodies = false
-script = ExtResource("6_cxg56")
 owner_entity = NodePath("..")
-
-[connection signal="targets_acquired" from="EnemyDetector" to="StateMachine/default" method="_on_enemy_detector_targets_acquired"]

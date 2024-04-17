@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfemqxgdpiugb"]
+
+[ext_resource type="Script" path="res://scenes/troop_detector/troop_detector.gd" id="1_71gef"]
+
+[node name="TroopDetector" type="ShapeCast2D"]
+target_position = Vector2(0, 0)
+collision_mask = 0
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource("1_71gef")

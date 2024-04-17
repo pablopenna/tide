@@ -5,6 +5,8 @@ class_name TroopManager extends Node
 @export_flags_2d_physics var troops_hitbox_layer_scanned
 @export_flags_2d_physics var troops_hurtbox_layer
 
+@export var troop_detector: TroopDetector
+
 var _troops: Array[Troop]
 var _troop_spread_radius
 const DEFAULT_TROOP_SPREAD_RADIUS = 50
@@ -15,6 +17,9 @@ var _rng
 func _ready():
 	_rng = RandomNumberGenerator.new()
 	_troop_spread_radius = DEFAULT_TROOP_SPREAD_RADIUS
+	if not troop_detector.is_node_ready():
+		await troop_detector.ready
+	troop_detector.targets_acquired.connect(make_troops_attack_targets)
 
 func create_troop():
 	var new_troop: Troop = troop_scene.instantiate()

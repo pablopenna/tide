@@ -1,4 +1,4 @@
-extends ShapeCast2D
+class_name TroopDetector extends ShapeCast2D
 
 @export var owner_entity: Entity
 var default_direction: Vector2 = Vector2.RIGHT

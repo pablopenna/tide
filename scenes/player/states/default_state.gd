@@ -18,6 +18,3 @@ func process(_delta):
 		
 	if Input.is_action_just_pressed("attack"):
 		troop_manager.make_troops_follow_leader()
-
-func _on_enemy_detector_targets_acquired(target_hurtbox):
-	troop_manager.make_troops_attack_targets(target_hurtbox)
