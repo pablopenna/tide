@@ -32,10 +32,10 @@ func initialize_states():
 	for stateKey in states:
 		var state: State = states[stateKey]
 		
-		state.change_to_state.connect(on_change_to_state)
+		state.change_to_state.connect(change_to_state)
 		state.managed_entity = self.managed_entity
 
-func on_change_to_state(new_state_name: String, context: Dictionary):
+func change_to_state(new_state_name: String, context: Dictionary):
 	var old_state = current_state
 	var new_state = states[new_state_name]
 	

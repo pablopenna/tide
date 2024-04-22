@@ -24,7 +24,7 @@ func _ready():
 func create_troop():
 	var new_troop: Troop = troop_scene.instantiate()
 	
-	new_troop.owner_entity = troop_owner
+	new_troop.troop_owner = troop_owner
 	new_troop.target_position_offset = _generate_troop_offset()
 	new_troop.speed = _rng.randf_range(MIN_TROOP_SPPEED, MAX_TROOP_SPPEED)
 	new_troop.position = troop_owner.position + new_troop.target_position_offset

@@ -18,11 +18,12 @@ radius = 14.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y572c"]
 size = Vector2(16, 16)
 
-[node name="Troop" type="CharacterBody2D"]
+[node name="Troop" type="CharacterBody2D" node_paths=PackedStringArray("state_machine")]
 collision_layer = 0
 collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_tv7vu")
+state_machine = NodePath("StateMachine")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_i84y6")
@@ -62,6 +63,4 @@ show_debug_label = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("RectangleShape2D_y572c")
 
-[connection signal="ordered_to_attack_target" from="." to="StateMachine/Follow" method="_on_troop_ordered_to_attack_target"]
-[connection signal="ordered_to_follow_owner" from="." to="StateMachine/Attack" method="_on_troop_ordered_to_follow_owner"]
 [connection signal="damaged" from="Hurtbox" to="." method="_on_hurtbox_damaged"]

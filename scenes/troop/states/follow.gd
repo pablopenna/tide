@@ -21,7 +21,7 @@ func process(_delta):
 func _get_target() -> Node2D:
 	if target:
 		return target
-	return managed_entity.owner_entity
+	return managed_entity.troop_owner
 
 func _get_target_position() -> Vector2:
 	return _get_target().position + managed_entity.target_position_offset
