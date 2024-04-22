@@ -32,8 +32,12 @@ func create_troop():
 	new_troop.set_hurtbox_layer(troops_hurtbox_layer)
 	
 	_troops.append(new_troop)
+	new_troop.died.connect(_process_troop_death)
 	add_child(new_troop)
 	
+func _process_troop_death(dead_troop: Troop):
+	_troops.erase(dead_troop)
+
 func _get_number_of_troops():
 	return len(_troops)
 	

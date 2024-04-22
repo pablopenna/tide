@@ -6,6 +6,8 @@ var speed: float
 
 @export var state_machine: StateManager
 
+signal died(troop: Troop)
+
 func attack_target(target: Node2D):
 	# HACK: prevent changing the state on each frame when detecting enemy
 	if state_machine.current_state.state_name != "attack":
@@ -21,4 +23,5 @@ func set_hitbox_layer(layer: int):
 	$Hitbox.collision_mask = layer
 
 func _on_hurtbox_damaged(_hitboxData):
+	died.emit(self)
 	queue_free()
