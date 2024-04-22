@@ -35,11 +35,13 @@ script = ExtResource("3_xgjno")
 initial_state = NodePath("Follow")
 managed_entity = NodePath("..")
 
-[node name="Follow" type="Node" parent="StateMachine"]
+[node name="Follow" type="Node" parent="StateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("4_5g1fc")
+hitbox = NodePath("../../Hitbox")
 
-[node name="Attack" type="Node" parent="StateMachine"]
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("5_f1627")
+hitbox = NodePath("../../Hitbox")
 
 [node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("entity_to_track")]
 collision_layer = 16

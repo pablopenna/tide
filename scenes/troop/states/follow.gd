@@ -2,6 +2,7 @@ extends State
 
 const TARGET_POSITION_ACCEPTED_DISTANCE: float = 1
 var target: Node2D
+@export var hitbox: Hitbox
 
 func _ready():
 	state_name = "follow"
@@ -9,6 +10,7 @@ func _ready():
 func enter(context):
 	if context.get('target'):
 		target = context.get('target')
+	hitbox.disable()
 	
 func process(_delta):
 	if _should_move_to_target_position():

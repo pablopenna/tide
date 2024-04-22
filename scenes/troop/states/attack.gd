@@ -2,12 +2,14 @@ extends State
 
 const TARGET_POSITION_ACCEPTED_DISTANCE: float = 1
 var target: Node2D
+@export var hitbox: Hitbox
 
 func _ready():
 	state_name = "attack"
 	
 func enter(context: Dictionary):
 	target = context.get('target')
+	hitbox.enable()
 
 func process(_delta):
 	### After killing target (and they queue_free()), it will be null

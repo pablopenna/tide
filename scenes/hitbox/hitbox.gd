@@ -9,7 +9,7 @@ func _ready():
 	area_entered.connect(_on_area_entered)
 	hitbox_data = find_children("*", "HitboxData")[0]
 	
-func _process(delta):
+func _process(_delta):
 	if entity_to_track:
 		_flip_horizontally_if_entity_facing_left()
 		_set_position_relative_to_entity()
