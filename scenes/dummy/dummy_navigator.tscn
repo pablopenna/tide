@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://w53q38u73myn"]
+
+[ext_resource type="Script" path="res://scenes/dummy/dummy_navigator.gd" id="1_pqayi"]
+[ext_resource type="Texture2D" uid="uid://di0boo8jtpvth" path="res://sprites/enemy.png" id="2_4ag1r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e0wii"]
+radius = 8.0
+
+[node name="dummy_navigator" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 2
+motion_mode = 1
+script = ExtResource("1_pqayi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_e0wii")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_4ag1r")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
