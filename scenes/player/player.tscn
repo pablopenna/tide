@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_n50c0"]
 [ext_resource type="Script" path="res://states/state_manager.gd" id="3_3uexm"]
 [ext_resource type="Script" path="res://scenes/player/states/default_state.gd" id="4_etbcj"]
-[ext_resource type="PackedScene" uid="uid://b07yhuwx4dkdn" path="res://scenes/troop/troop_manager.tscn" id="5_53p1u"]
+[ext_resource type="PackedScene" uid="uid://b07yhuwx4dkdn" path="res://scenes/troop_manager/troop_manager.tscn" id="5_53p1u"]
 [ext_resource type="PackedScene" uid="uid://dfemqxgdpiugb" path="res://scenes/troop_detector/troop_detector.tscn" id="6_r46j7"]
 [ext_resource type="Shape2D" uid="uid://cwk0rjafs6j5e" path="res://scenes/troop_detector/cone.tres" id="7_gg1ut"]
 
@@ -34,9 +34,9 @@ troop_manager = NodePath("../../TroopManager")
 
 [node name="TroopManager" parent="." node_paths=PackedStringArray("troop_owner", "troop_detector") instance=ExtResource("5_53p1u")]
 troop_owner = NodePath("..")
+troop_detector = NodePath("../TroopDetector")
 troops_hitbox_layer_scanned = 512
 troops_hurtbox_layer = 256
-troop_detector = NodePath("../TroopDetector")
 
 [node name="TroopDetector" parent="." node_paths=PackedStringArray("owner_entity") instance=ExtResource("6_r46j7")]
 shape = ExtResource("7_gg1ut")
