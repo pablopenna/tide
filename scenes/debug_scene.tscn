@@ -28,6 +28,7 @@ position = Vector2(123, 284)
 position = Vector2(379, 338)
 
 [node name="dummy_navigator" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_4edjm")]
+process_mode = 4
 position = Vector2(-709, -160)
 wall_min_slide_angle = 0.0
 target = NodePath("../Player")

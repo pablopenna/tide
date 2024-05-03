@@ -20,6 +20,7 @@ config/icon="res://tide-icon.png"
 
 FpsCounter="*res://scenes/fps_counter/fps_counter.tscn"
 PhysicsLayersNamesUtils="*res://utils/physics_layers_names_utils.gd"
+Interface="*res://utils/interfaces/interface.gd"
 
 [display]
 

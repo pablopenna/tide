@@ -1,13 +1,13 @@
 [gd_scene load_steps=12 format=3 uid="uid://clindq3qmowxv"]
 
-[ext_resource type="Script" path="res://scenes/troop/common/troop.gd" id="1_tv7vu"]
-[ext_resource type="Texture2D" uid="uid://bq8np3qusaakl" path="res://sprites/troop.png" id="2_tqwij"]
-[ext_resource type="Script" path="res://states/state_manager.gd" id="3_xgjno"]
-[ext_resource type="Script" path="res://scenes/troop/common/states/follow.gd" id="4_5g1fc"]
-[ext_resource type="Script" path="res://scenes/troop/knight/states/attack.gd" id="5_f1627"]
-[ext_resource type="Script" path="res://scenes/hitbox/hitbox.gd" id="6_3mp4b"]
-[ext_resource type="Script" path="res://scenes/hitbox/hitbox_data.gd" id="7_1fw48"]
-[ext_resource type="PackedScene" uid="uid://m4h80v367bd7" path="res://scenes/hurtbox/hurtbox.tscn" id="8_cumvf"]
+[ext_resource type="Script" path="res://scenes/troop/knight/knight.gd" id="1_0w7wq"]
+[ext_resource type="Texture2D" uid="uid://bq8np3qusaakl" path="res://sprites/troop.png" id="2_gdcmr"]
+[ext_resource type="Script" path="res://states/state_manager.gd" id="3_4lnfq"]
+[ext_resource type="Script" path="res://scenes/troop/common/states/follow.gd" id="4_sw76n"]
+[ext_resource type="Script" path="res://scenes/troop/knight/states/attack.gd" id="5_exowa"]
+[ext_resource type="Script" path="res://scenes/hitbox/hitbox.gd" id="6_awudp"]
+[ext_resource type="Script" path="res://scenes/hitbox/hitbox_data.gd" id="7_lrbaa"]
+[ext_resource type="PackedScene" uid="uid://m4h80v367bd7" path="res://scenes/hurtbox/hurtbox.tscn" id="8_4kpwj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i84y6"]
 size = Vector2(16, 16)
@@ -22,43 +22,43 @@ size = Vector2(16, 16)
 collision_layer = 0
 collision_mask = 2
 motion_mode = 1
-script = ExtResource("1_tv7vu")
+wall_min_slide_angle = 0.0
+script = ExtResource("1_0w7wq")
 state_machine = NodePath("StateMachine")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_i84y6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_tqwij")
+texture = ExtResource("2_gdcmr")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "managed_entity")]
-script = ExtResource("3_xgjno")
+script = ExtResource("3_4lnfq")
 initial_state = NodePath("Follow")
 managed_entity = NodePath("..")
 
 [node name="Follow" type="Node" parent="StateMachine" node_paths=PackedStringArray("hitbox")]
-script = ExtResource("4_5g1fc")
+script = ExtResource("4_sw76n")
 hitbox = NodePath("../../Hitbox")
 
 [node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("hitbox")]
-script = ExtResource("5_f1627")
+script = ExtResource("5_exowa")
 hitbox = NodePath("../../Hitbox")
 
 [node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("entity_to_track")]
 collision_layer = 16
 collision_mask = 512
-script = ExtResource("6_3mp4b")
+script = ExtResource("6_awudp")
 entity_to_track = NodePath("..")
 
 [node name="HitboxData" type="Node" parent="Hitbox"]
-script = ExtResource("7_1fw48")
+script = ExtResource("7_lrbaa")
 damage = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_ch1o1")
 
-[node name="Hurtbox" parent="." instance=ExtResource("8_cumvf")]
-show_debug_label = true
+[node name="Hurtbox" parent="." instance=ExtResource("8_4kpwj")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("RectangleShape2D_y572c")
