@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b07yhuwx4dkdn"]
 
 [ext_resource type="Script" path="res://scenes/troop_manager/troop_manager.gd" id="1_xf0ym"]
-[ext_resource type="PackedScene" uid="uid://clindq3qmowxv" path="res://scenes/troop/troop.tscn" id="2_g31bs"]
+[ext_resource type="PackedScene" uid="uid://clindq3qmowxv" path="res://scenes/troop/knight/knight.tscn" id="2_g31bs"]
 [ext_resource type="Script" path="res://scenes/troop_manager/commander.gd" id="3_5kffa"]
 [ext_resource type="Script" path="res://scenes/troop_manager/factory.gd" id="4_pqo8y"]
 

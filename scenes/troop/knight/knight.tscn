@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://clindq3qmowxv"]
 
-[ext_resource type="Script" path="res://scenes/troop/troop.gd" id="1_tv7vu"]
+[ext_resource type="Script" path="res://scenes/troop/common/troop.gd" id="1_tv7vu"]
 [ext_resource type="Texture2D" uid="uid://bq8np3qusaakl" path="res://sprites/troop.png" id="2_tqwij"]
 [ext_resource type="Script" path="res://states/state_manager.gd" id="3_xgjno"]
-[ext_resource type="Script" path="res://scenes/troop/states/follow.gd" id="4_5g1fc"]
-[ext_resource type="Script" path="res://scenes/troop/states/attack.gd" id="5_f1627"]
+[ext_resource type="Script" path="res://scenes/troop/common/states/follow.gd" id="4_5g1fc"]
+[ext_resource type="Script" path="res://scenes/troop/knight/states/attack.gd" id="5_f1627"]
 [ext_resource type="Script" path="res://scenes/hitbox/hitbox.gd" id="6_3mp4b"]
 [ext_resource type="Script" path="res://scenes/hitbox/hitbox_data.gd" id="7_1fw48"]
 [ext_resource type="PackedScene" uid="uid://m4h80v367bd7" path="res://scenes/hurtbox/hurtbox.tscn" id="8_cumvf"]
