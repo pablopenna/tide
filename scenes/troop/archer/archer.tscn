@@ -1,0 +1,71 @@
+[gd_scene load_steps=14 format=3 uid="uid://bx0y1mftce4uq"]
+
+[ext_resource type="Script" path="res://scenes/troop/archer/archer.gd" id="1_8q2fw"]
+[ext_resource type="Texture2D" uid="uid://bq8np3qusaakl" path="res://sprites/troop.png" id="2_kgm0w"]
+[ext_resource type="Script" path="res://states/state_manager.gd" id="3_b7pk8"]
+[ext_resource type="Script" path="res://scenes/troop/common/states/follow.gd" id="4_0jwmp"]
+[ext_resource type="Script" path="res://scenes/troop/archer/state/shoot.gd" id="5_4wuus"]
+[ext_resource type="PackedScene" uid="uid://b8yls0byl10aq" path="res://scenes/projectile/projectile_shooter.tscn" id="6_gffve"]
+[ext_resource type="Script" path="res://scenes/hitbox/hitbox.gd" id="6_o3isd"]
+[ext_resource type="PackedScene" uid="uid://vti62y788f5n" path="res://scenes/projectile/projectile.tscn" id="7_5as5o"]
+[ext_resource type="Script" path="res://scenes/hitbox/hitbox_data.gd" id="7_evf0b"]
+[ext_resource type="PackedScene" uid="uid://m4h80v367bd7" path="res://scenes/hurtbox/hurtbox.tscn" id="8_xja6d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i84y6"]
+size = Vector2(16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ch1o1"]
+radius = 14.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y572c"]
+size = Vector2(16, 16)
+
+[node name="Archer" type="CharacterBody2D" node_paths=PackedStringArray("state_machine")]
+collision_layer = 0
+collision_mask = 2
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_8q2fw")
+state_machine = NodePath("StateMachine")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_i84y6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_kgm0w")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "managed_entity")]
+script = ExtResource("3_b7pk8")
+initial_state = NodePath("Follow")
+managed_entity = NodePath("..")
+
+[node name="Follow" type="Node" parent="StateMachine" node_paths=PackedStringArray("hitbox")]
+script = ExtResource("4_0jwmp")
+hitbox = NodePath("../../Hitbox")
+
+[node name="Shoot" type="Node" parent="StateMachine"]
+script = ExtResource("5_4wuus")
+
+[node name="ProjectileShooter" parent="StateMachine/Shoot" instance=ExtResource("6_gffve")]
+projectileScene = ExtResource("7_5as5o")
+projectile_scanner_layer = 512
+
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("entity_to_track")]
+collision_layer = 16
+collision_mask = 512
+script = ExtResource("6_o3isd")
+entity_to_track = NodePath("..")
+
+[node name="HitboxData" type="Node" parent="Hitbox"]
+script = ExtResource("7_evf0b")
+damage = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_ch1o1")
+
+[node name="Hurtbox" parent="." instance=ExtResource("8_xja6d")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_y572c")
+
+[connection signal="damaged" from="Hurtbox" to="." method="_on_hurtbox_damaged"]

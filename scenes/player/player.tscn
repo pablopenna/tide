@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cmxyconummrk8"]
+[gd_scene load_steps=10 format=3 uid="uid://cmxyconummrk8"]
 
 [ext_resource type="Texture2D" uid="uid://dixmbr8nug28q" path="res://sprites/player.png" id="1_2o7nc"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_n50c0"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scenes/player/states/default_state.gd" id="4_etbcj"]
 [ext_resource type="PackedScene" uid="uid://b07yhuwx4dkdn" path="res://scenes/troop_manager/troop_manager.tscn" id="5_53p1u"]
 [ext_resource type="PackedScene" uid="uid://dfemqxgdpiugb" path="res://scenes/troop_detector/troop_detector.tscn" id="6_r46j7"]
+[ext_resource type="PackedScene" uid="uid://bx0y1mftce4uq" path="res://scenes/troop/archer/archer.tscn" id="6_unf0k"]
 [ext_resource type="Shape2D" uid="uid://cwk0rjafs6j5e" path="res://scenes/troop_detector/cone.tres" id="7_gg1ut"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_od5lt"]
@@ -34,6 +35,7 @@ troop_manager = NodePath("../../TroopManager")
 
 [node name="TroopManager" parent="." node_paths=PackedStringArray("troop_owner", "troop_detector") instance=ExtResource("5_53p1u")]
 troop_owner = NodePath("..")
+troop_scene = ExtResource("6_unf0k")
 troop_detector = NodePath("../TroopDetector")
 troops_hitbox_layer_scanned = 512
 troops_hurtbox_layer = 256
