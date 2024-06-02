@@ -4,6 +4,7 @@ class_name Hitbox extends Area2D
 
 @export var entity_to_track: Entity
 var hitbox_data: HitboxData
+signal hit
 
 func _ready(): 
 	area_entered.connect(_on_area_entered)
@@ -29,6 +30,7 @@ func disable():
 	monitorable = false
 	
 func _on_hurtbox_entered(hurtbox: Hurtbox):
+	hit.emit()
 	hurtbox.receiveDamage(hitbox_data)
 	
 func _flip_horizontally_if_entity_facing_left():
