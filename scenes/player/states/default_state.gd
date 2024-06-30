@@ -13,8 +13,11 @@ func process(_delta):
 	input = raw_input.normalized()
 	managed_entity.velocity = input * speed
 	
-	if Input.is_action_just_pressed("add_player_troop"):
-		troop_manager.create_troop()
+	if Input.is_action_just_pressed("player_troop_add_knight"):
+		troop_manager.create_knight()
 		
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("player_troop_add_archer"):
+		troop_manager.create_archer()
+		
+	if Input.is_action_just_pressed("player_troop_regroup"):
 		troop_manager.make_troops_follow_leader()

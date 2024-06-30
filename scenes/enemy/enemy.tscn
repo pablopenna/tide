@@ -23,9 +23,9 @@ texture = ExtResource("2_ja4re")
 
 [node name="TroopManager" parent="." node_paths=PackedStringArray("troop_owner", "troop_detector") instance=ExtResource("3_oby0l")]
 troop_owner = NodePath("..")
+troop_detector = NodePath("../TroopDetector")
 troops_hitbox_layer_scanned = 256
 troops_hurtbox_layer = 512
-troop_detector = NodePath("../TroopDetector")
 
 [node name="TroopDetector" parent="." node_paths=PackedStringArray("owner_entity") instance=ExtResource("4_k6yqj")]
 shape = ExtResource("5_8t5rd")

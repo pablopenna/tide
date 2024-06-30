@@ -4,8 +4,10 @@ const DEFAULT_TROOP_SPREAD_RADIUS = 50
 const MIN_TROOP_SPEED = 40
 const MAX_TROOP_SPEED = 80
 
+@export var knight_scene: PackedScene
+@export var archer_scene: PackedScene
+
 var troop_owner: Entity
-var troop_scene: PackedScene
 var troops_layer_scanned_by_hitbox
 var troops_hurtbox_layer
 var troop_detector: TroopDetector
@@ -17,8 +19,14 @@ var _rng
 func _ready():
 	_rng = RandomNumberGenerator.new()
 	_troop_spread_radius = DEFAULT_TROOP_SPREAD_RADIUS
+	
+func create_knight():
+	_create_troop(knight_scene)
 
-func create_troop():
+func create_archer():
+	_create_troop(archer_scene)
+
+func _create_troop(troop_scene: PackedScene):
 	var new_troop: Troop = troop_scene.instantiate() as Troop
 	
 	new_troop.initialize_with(
@@ -55,9 +63,6 @@ func _on_troop_manager_troops_hurtbox_layer_provided(hurtbox_layer):
 
 func _on_troop_manager_troops_hitbox_layer_scanned_provided(hitbox_layer):
 	self.troops_layer_scanned_by_hitbox = hitbox_layer
-
-func _on_troop_manager_troop_scene_provided(troop_scene):
-	self.troop_scene = troop_scene
 
 func _on_troop_manager_troop_owner_provided(troop_owner):
 	self.troop_owner = troop_owner
