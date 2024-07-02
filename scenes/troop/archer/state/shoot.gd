@@ -1,6 +1,6 @@
 extends State
 
-@onready var projectile_shooter = $ProjectileShooter
+@export var projectile_shooter: ProjectileShooter
 
 const MAX_DISTANCE_TO_TARGET = 500
 const SHOOT_COOLDOWN = 500

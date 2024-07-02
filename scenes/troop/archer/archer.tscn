@@ -20,12 +20,13 @@ radius = 14.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y572c"]
 size = Vector2(16, 16)
 
-[node name="Archer" type="CharacterBody2D" node_paths=PackedStringArray("state_machine")]
+[node name="Archer" type="CharacterBody2D" node_paths=PackedStringArray("projectile_shooter", "state_machine")]
 collision_layer = 0
 collision_mask = 2
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_8q2fw")
+projectile_shooter = NodePath("StateMachine/Shoot/ProjectileShooter")
 state_machine = NodePath("StateMachine")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -43,12 +44,12 @@ managed_entity = NodePath("..")
 script = ExtResource("4_0jwmp")
 hitbox = NodePath("../../Hitbox")
 
-[node name="Shoot" type="Node" parent="StateMachine"]
+[node name="Shoot" type="Node" parent="StateMachine" node_paths=PackedStringArray("projectile_shooter")]
 script = ExtResource("5_4wuus")
+projectile_shooter = NodePath("ProjectileShooter")
 
 [node name="ProjectileShooter" parent="StateMachine/Shoot" instance=ExtResource("6_gffve")]
 projectileScene = ExtResource("7_5as5o")
-projectile_scanner_layer = 512
 
 [node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("entity_to_track")]
 collision_layer = 16
