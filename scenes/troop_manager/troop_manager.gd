@@ -1,13 +1,13 @@
 class_name TroopManager extends Node
 
 @export var troop_owner: Entity
-@export var troop_detector: TroopDetector
+@export var troop_detectors: Array[TroopDetector]
 @export_flags_2d_physics var troops_hitbox_layer_scanned
 @export_flags_2d_physics var troops_hurtbox_layer
 @onready var troops: Array[Troop] = []
 
 signal troop_owner_provided(troop_owner)
-signal troop_detector_provided(troop_detector)
+signal troop_detectors_provided(troop_detectors)
 signal troops_hitbox_layer_scanned_provided(hitbox)
 signal troops_hurtbox_layer_provided(hurtbox)
 signal troops_provided(troops)
@@ -17,7 +17,7 @@ signal troops_provided(troops)
 
 func _ready():
 	troop_owner_provided.emit(troop_owner)
-	troop_detector_provided.emit(troop_detector)
+	troop_detectors_provided.emit(troop_detectors)
 	troops_hitbox_layer_scanned_provided.emit(troops_hitbox_layer_scanned)
 	troops_hurtbox_layer_provided.emit(troops_hurtbox_layer)
 	troops_provided.emit(troops)

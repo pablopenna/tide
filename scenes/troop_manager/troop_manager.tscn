@@ -17,7 +17,7 @@ script = ExtResource("4_pqo8y")
 knight_scene = ExtResource("2_g31bs")
 archer_scene = ExtResource("5_mip3s")
 
-[connection signal="troop_detector_provided" from="." to="Commander" method="_on_troop_manager_troop_detector_provided"]
+[connection signal="troop_detectors_provided" from="." to="Commander" method="_on_troop_manager_troop_detectors_provided"]
 [connection signal="troop_owner_provided" from="." to="Factory" method="_on_troop_manager_troop_owner_provided"]
 [connection signal="troops_hitbox_layer_scanned_provided" from="." to="Factory" method="_on_troop_manager_troops_hitbox_layer_scanned_provided"]
 [connection signal="troops_hurtbox_layer_provided" from="." to="Factory" method="_on_troop_manager_troops_hurtbox_layer_provided"]
