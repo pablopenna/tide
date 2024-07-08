@@ -3,7 +3,7 @@
 
 class_name Hurtbox extends Area2D
 
-signal damaged
+signal damaged(hitboxData: HitboxData)
 
 @export var show_debug_label = false
 

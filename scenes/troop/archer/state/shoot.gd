@@ -2,9 +2,10 @@ extends State
 
 @export var projectile_shooter: ProjectileShooter
 
-const MAX_DISTANCE_TO_TARGET = 500
-const SHOOT_COOLDOWN = 500
+const MAX_DISTANCE_TO_TARGET = 200
+const SHOOT_COOLDOWN = 1000
 const PROJECTILE_SPEED = 500
+const PROJECTILE_DAMAGE = 3
 
 @onready var ticks_on_last_shoot = 0
 var target
@@ -31,10 +32,10 @@ func _shoot():
 		projectile_shooter.shoot(
 			managed_entity.global_position,
 			managed_entity.global_position.direction_to(target.global_position), 
-			PROJECTILE_SPEED
+			PROJECTILE_SPEED,
+			PROJECTILE_DAMAGE
 		)
 		ticks_on_last_shoot = Time.get_ticks_msec()
 	
 func _is_shoot_in_cooldown():
 	return Time.get_ticks_msec() < ticks_on_last_shoot + SHOOT_COOLDOWN
-	

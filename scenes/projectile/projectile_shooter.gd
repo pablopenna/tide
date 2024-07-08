@@ -6,7 +6,8 @@ var projectile_scanned_layer: int
 func shoot(
 	initial_position: Vector2,
 	direction: Vector2, 
-	speed: float
+	speed: float,
+	damage: int,
 ):
 	var projectile = projectileScene.instantiate() as Projectile
 	
@@ -15,5 +16,6 @@ func shoot(
 	projectile.direction = direction
 	projectile.speed = speed
 	projectile.global_position = initial_position
+	projectile.damage = damage
 	
 	get_tree().get_root().add_child(projectile)

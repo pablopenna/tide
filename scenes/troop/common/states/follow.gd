@@ -10,7 +10,9 @@ func _ready():
 func enter(context):
 	if context.get('target'):
 		target = context.get('target')
-	hitbox.disable()
+	# HACK: Archers do not have hitboxes in their tree, their projectiles do
+	if hitbox:
+		hitbox.disable()
 	
 func process(_delta):
 	if _should_move_to_target_position():
