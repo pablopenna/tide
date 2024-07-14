@@ -1,12 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://bx0y1mftce4uq"]
+[gd_scene load_steps=13 format=3 uid="uid://bx0y1mftce4uq"]
 
 [ext_resource type="Script" path="res://scenes/troop/archer/archer.gd" id="1_8q2fw"]
 [ext_resource type="Texture2D" uid="uid://bq8np3qusaakl" path="res://sprites/troop.png" id="2_kgm0w"]
 [ext_resource type="Script" path="res://states/state_manager.gd" id="3_b7pk8"]
-[ext_resource type="Script" path="res://scenes/troop/common/states/follow.gd" id="4_0jwmp"]
+[ext_resource type="Script" path="res://scenes/troop/common/states/follow_leader.gd" id="4_3nm1n"]
 [ext_resource type="Script" path="res://scenes/troop/archer/state/shoot.gd" id="5_4wuus"]
 [ext_resource type="PackedScene" uid="uid://b8yls0byl10aq" path="res://scenes/projectile/projectile_shooter.tscn" id="6_gffve"]
 [ext_resource type="PackedScene" uid="uid://vti62y788f5n" path="res://scenes/projectile/projectile.tscn" id="7_5as5o"]
+[ext_resource type="Script" path="res://scenes/troop/archer/state/get_in_range.gd" id="8_hjki4"]
 [ext_resource type="PackedScene" uid="uid://m4h80v367bd7" path="res://scenes/hurtbox/hurtbox.tscn" id="8_xja6d"]
 [ext_resource type="PackedScene" uid="uid://bwh3ymoxbgi4h" path="res://scenes/health_points_manager/health_points_manager.tscn" id="11_8eii5"]
 
@@ -34,18 +35,26 @@ texture = ExtResource("2_kgm0w")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "managed_entity")]
 script = ExtResource("3_b7pk8")
-initial_state = NodePath("Follow")
+initial_state = NodePath("FollowLeader")
 managed_entity = NodePath("..")
 
-[node name="Follow" type="Node" parent="StateMachine"]
-script = ExtResource("4_0jwmp")
+[node name="FollowLeader" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_state")]
+script = ExtResource("4_3nm1n")
+attack_state = NodePath("../Shoot")
 
-[node name="Shoot" type="Node" parent="StateMachine" node_paths=PackedStringArray("projectile_shooter")]
+[node name="Shoot" type="Node" parent="StateMachine" node_paths=PackedStringArray("projectile_shooter", "get_in_range_state", "follow_leader_state")]
 script = ExtResource("5_4wuus")
 projectile_shooter = NodePath("ProjectileShooter")
+get_in_range_state = NodePath("../GetInRange")
+follow_leader_state = NodePath("../FollowLeader")
 
 [node name="ProjectileShooter" parent="StateMachine/Shoot" instance=ExtResource("6_gffve")]
 projectileScene = ExtResource("7_5as5o")
+
+[node name="GetInRange" type="Node" parent="StateMachine" node_paths=PackedStringArray("shoot_state", "follow_leader_state")]
+script = ExtResource("8_hjki4")
+shoot_state = NodePath("../Shoot")
+follow_leader_state = NodePath("../FollowLeader")
 
 [node name="HealthPointsManager" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("11_8eii5")]
 hurtbox = NodePath("../Hurtbox")

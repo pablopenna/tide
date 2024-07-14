@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://scenes/troop/knight/knight.gd" id="1_0w7wq"]
 [ext_resource type="Texture2D" uid="uid://bq8np3qusaakl" path="res://sprites/troop.png" id="2_gdcmr"]
 [ext_resource type="Script" path="res://states/state_manager.gd" id="3_4lnfq"]
-[ext_resource type="Script" path="res://scenes/troop/common/states/follow.gd" id="4_sw76n"]
-[ext_resource type="Script" path="res://scenes/troop/knight/states/attack.gd" id="5_exowa"]
+[ext_resource type="Script" path="res://scenes/troop/common/states/follow_leader.gd" id="4_byw1e"]
+[ext_resource type="Script" path="res://scenes/troop/common/states/melee_attack.gd" id="5_mri3a"]
 [ext_resource type="Script" path="res://scenes/hitbox/hitbox.gd" id="6_awudp"]
 [ext_resource type="Script" path="res://scenes/hitbox/hitbox_data.gd" id="7_lrbaa"]
 [ext_resource type="PackedScene" uid="uid://m4h80v367bd7" path="res://scenes/hurtbox/hurtbox.tscn" id="8_4kpwj"]
@@ -19,7 +19,7 @@ radius = 14.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y572c"]
 size = Vector2(16, 16)
 
-[node name="Knight" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "hp_manager")]
+[node name="Knight" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "hp_manager", "attack_state", "follow_leader_state")]
 collision_layer = 0
 collision_mask = 2
 motion_mode = 1
@@ -27,6 +27,8 @@ wall_min_slide_angle = 0.0
 script = ExtResource("1_0w7wq")
 state_machine = NodePath("StateMachine")
 hp_manager = NodePath("HealthPointsManager")
+attack_state = NodePath("StateMachine/Attack")
+follow_leader_state = NodePath("StateMachine/FollowLeader")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_i84y6")
@@ -36,16 +38,17 @@ texture = ExtResource("2_gdcmr")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "managed_entity")]
 script = ExtResource("3_4lnfq")
-initial_state = NodePath("Follow")
+initial_state = NodePath("FollowLeader")
 managed_entity = NodePath("..")
 
-[node name="Follow" type="Node" parent="StateMachine" node_paths=PackedStringArray("hitbox")]
-script = ExtResource("4_sw76n")
-hitbox = NodePath("../../Hitbox")
+[node name="FollowLeader" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_state")]
+script = ExtResource("4_byw1e")
+attack_state = NodePath("../Attack")
 
-[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("hitbox")]
-script = ExtResource("5_exowa")
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("hitbox", "follow_leader_state")]
+script = ExtResource("5_mri3a")
 hitbox = NodePath("../../Hitbox")
+follow_leader_state = NodePath("../FollowLeader")
 
 [node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("entity_to_track", "hitbox_data")]
 collision_layer = 16

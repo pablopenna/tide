@@ -14,6 +14,7 @@ config/name="Tide"
 run/main_scene="res://scenes/debug_scene.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 run/max_fps=60
+boot_splash/use_filter=false
 config/icon="res://tide-icon.png"
 
 [autoload]
