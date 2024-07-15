@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://dg0wodn064gs2"]
+[gd_scene load_steps=6 format=3 uid="uid://dg0wodn064gs2"]
 
 [ext_resource type="Script" path="res://scenes/follower_camera/camera_root.gd" id="1_kovmb"]
-[ext_resource type="Script" path="res://scenes/follower_camera/camera.gd" id="2_0q7kl"]
 [ext_resource type="Script" path="res://scenes/follower_camera/small_box.gd" id="3_1cgvm"]
 [ext_resource type="Script" path="res://scenes/follower_camera/big_box.gd" id="4_qme1u"]
 
@@ -12,12 +11,8 @@ size = Vector2(50, 50)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s681t"]
 size = Vector2(150, 150)
 
-[node name="FollowerCamera" type="Node"]
+[node name="FollowerCamera" type="Camera2D"]
 script = ExtResource("1_kovmb")
-
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("big_box")]
-script = ExtResource("2_0q7kl")
-big_box = NodePath("../BigBox")
 
 [node name="SmallBox" type="Node2D" parent="."]
 position = Vector2(774, 278)
