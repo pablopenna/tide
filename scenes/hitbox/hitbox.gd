@@ -29,15 +29,15 @@ func disable():
 	monitoring = false
 	monitorable = false
 	
-func _on_hurtbox_entered(hurtbox: Hurtbox):
+func _on_hurtbox_entered(hurtbox: Hurtbox) -> void:
 	hit.emit()
 	hurtbox.receiveDamage(hitbox_data)
 	
-func _flip_horizontally_if_entity_facing_left():
+func _flip_horizontally_if_entity_facing_left() -> void:
 	if entity_to_track.facing_direction == Vector2.LEFT:
 		self.scale.x = -1
 	else:
 		self.scale.x = 1
 		
-func _set_position_relative_to_entity():
+func _set_position_relative_to_entity() -> void:
 	self.global_position = entity_to_track.global_position

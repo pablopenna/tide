@@ -4,11 +4,11 @@ extends State
 var input: Vector2
 @export var troop_manager: TroopManager
 
-func _ready():
+func _ready() -> void:
 	state_name = "default"
 	input = Vector2.ZERO
 
-func process(_delta):
+func process(_delta: float) -> void:
 	var raw_input: Vector2 = Vector2(Input.get_axis("ui_left","ui_right"), Input.get_axis("ui_up","ui_down"))
 	input = raw_input.normalized()
 	managed_entity.velocity = input * speed

@@ -7,37 +7,37 @@ var current_state: State = initial_state
 
 signal state_changed(new_state: String, old_state: String, context: Dictionary)
 
-func _ready():
+func _ready() -> void:
 	states = get_children_as_state_dictionary()
 	initialize_states()
 	current_state = initial_state
 	initial_state.enter({})
 	
-func _process(delta):
+func _process(delta: float) -> void:
 	current_state.process(delta)
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	current_state.physics_process(delta)
 
 func get_children_as_state_dictionary() -> Dictionary:
 	var children: Array[Node] = self.get_children()
 	var states: Dictionary = {}
 	
-	for child in children as Array[State]:
+	for child: State in children as Array[State]:
 		states[child.state_name] = child
 		
 	return states
 	
-func initialize_states():
-	for stateKey in states:
+func initialize_states() -> void:
+	for stateKey: String in states:
 		var state: State = states[stateKey]
 		
 		state.change_to_state.connect(change_to_state)
 		state.managed_entity = self.managed_entity
 
-func change_to_state(new_state_name: String, context: Dictionary):
-	var old_state = current_state
-	var new_state = states[new_state_name]
+func change_to_state(new_state_name: String, context: Dictionary) -> void:
+	var old_state: State = current_state
+	var new_state: State = states[new_state_name]
 	
 	old_state.exit(new_state)
 	current_state = new_state

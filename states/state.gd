@@ -10,15 +10,15 @@ var managed_entity: Entity
 # StateManager uses this as the dict key where states are stored
 var state_name: String
 
-func enter(context: Dictionary):
+func enter(context: Dictionary) -> void:
 	pass
 	
-func process(_delta):
+func process(delta: float) -> void:
 	pass
 	
-func physics_process(_delta):
+func physics_process(delta: float) -> void:
 	pass
 
-func exit(_new_state: State):
+func exit(new_state: State) -> void:
 	pass
 
