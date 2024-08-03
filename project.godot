@@ -82,3 +82,8 @@ enemy_troop_add_archer={
 2d_physics/layer_8="player_hurtbox"
 2d_physics/layer_9="ally_hurtbox"
 2d_physics/layer_10="enemy_hurtbox"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+textures/default_filters/anisotropic_filtering_level=0
