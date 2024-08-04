@@ -1,9 +1,11 @@
-[gd_scene load_steps=31 format=3 uid="uid://clindq3qmowxv"]
+[gd_scene load_steps=36 format=3 uid="uid://clindq3qmowxv"]
 
 [ext_resource type="Script" path="res://scenes/troop/knight/knight.gd" id="1_0w7wq"]
 [ext_resource type="Script" path="res://states/state_manager.gd" id="3_4lnfq"]
 [ext_resource type="Script" path="res://scenes/troop/common/states/follow_leader.gd" id="4_byw1e"]
 [ext_resource type="Script" path="res://scenes/troop/common/states/melee_attack.gd" id="5_mri3a"]
+[ext_resource type="Script" path="res://scenes/troop/common/states/get_in_range.gd" id="5_sucip"]
+[ext_resource type="Script" path="res://scenes/troop/common/states/ponder.gd" id="6_6iyyl"]
 [ext_resource type="Script" path="res://scenes/hitbox/hitbox_data.gd" id="7_lrbaa"]
 [ext_resource type="PackedScene" uid="uid://m4h80v367bd7" path="res://scenes/hurtbox/hurtbox.tscn" id="8_4kpwj"]
 [ext_resource type="PackedScene" uid="uid://bwh3ymoxbgi4h" path="res://scenes/health_points_manager/health_points_manager.tscn" id="8_esftb"]
@@ -130,24 +132,6 @@ tracks/0/keys = {
 "values": [1, 2, 1, 3]
 }
 
-[sub_resource type="Animation" id="Animation_pqcxm"]
-resource_name = "walk_up"
-length = 0.80002
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [7, 8, 7, 9]
-}
-
 [sub_resource type="Animation" id="Animation_1elwy"]
 resource_name = "walk_right"
 length = 0.80002
@@ -166,8 +150,170 @@ tracks/0/keys = {
 "values": [4, 5, 4, 6]
 }
 
+[sub_resource type="Animation" id="Animation_pqcxm"]
+resource_name = "walk_up"
+length = 0.80002
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 7, 9]
+}
+
+[sub_resource type="Animation" id="Animation_fmvdm"]
+resource_name = "attack_down"
+length = 0.80002
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 2]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sword")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"disable"
+}, {
+"args": [],
+"method": &"enable"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sword/Sprite2D:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_2tpqx"]
+resource_name = "attack_right"
+length = 0.80002
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 6]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sword")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"disable"
+}, {
+"args": [],
+"method": &"enable"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sword/Sprite2D:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_00rqt"]
+resource_name = "attack_up"
+length = 0.80002
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [7, 9]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sword")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"disable"
+}, {
+"args": [],
+"method": &"enable"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sword/Sprite2D:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8ml1y"]
 _data = {
+"attack_down": SubResource("Animation_fmvdm"),
+"attack_right": SubResource("Animation_2tpqx"),
+"attack_up": SubResource("Animation_00rqt"),
 "idle_down": SubResource("Animation_e608t"),
 "walk_down": SubResource("Animation_35t1j"),
 "walk_right": SubResource("Animation_1elwy"),
@@ -175,7 +321,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bco73"]
-size = Vector2(15, 4)
+size = Vector2(21.5, 4)
 
 [node name="Knight" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "hp_manager", "attack_state", "follow_leader_state", "hurtbox", "hitbox")]
 collision_layer = 0
@@ -203,14 +349,28 @@ script = ExtResource("4_byw1e")
 attack_state = NodePath("../Attack")
 animation_player = NodePath("../../AnimationPlayer")
 
-[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("hitbox", "follow_leader_state")]
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("sword", "follow_leader_state", "get_in_range_state", "animation_player")]
 script = ExtResource("5_mri3a")
-hitbox = NodePath("../../Sword")
+sword = NodePath("../../Sword")
 follow_leader_state = NodePath("../FollowLeader")
+get_in_range_state = NodePath("../GetInRange")
+animation_player = NodePath("../../AnimationPlayer")
+
+[node name="GetInRange" type="Node" parent="StateMachine" node_paths=PackedStringArray("shoot_state", "follow_leader_state", "animation_player")]
+script = ExtResource("5_sucip")
+shoot_state = NodePath("../Attack")
+follow_leader_state = NodePath("../FollowLeader")
+animation_player = NodePath("../../AnimationPlayer")
+
+[node name="Ponder" type="Node" parent="StateMachine" node_paths=PackedStringArray("follow_leader_state", "get_in_range_state", "attack_state")]
+script = ExtResource("6_6iyyl")
+follow_leader_state = NodePath("../FollowLeader")
+get_in_range_state = NodePath("../GetInRange")
+attack_state = NodePath("../Attack")
 
 [node name="HealthPointsManager" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("8_esftb")]
 hurtbox = NodePath("../Hurtbox")
-health = 10
+health = 40
 
 [node name="Hurtbox" parent="." instance=ExtResource("8_4kpwj")]
 
@@ -218,8 +378,9 @@ health = 10
 shape = SubResource("RectangleShape2D_y572c")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("entity")]
+z_index = 1
 sprite_frames = SubResource("SpriteFrames_dho33")
-frame = 4
+frame = 1
 script = ExtResource("10_0kxat")
 entity = NodePath("..")
 
@@ -228,9 +389,10 @@ libraries = {
 "": SubResource("AnimationLibrary_8ml1y")
 }
 
-[node name="Sword" type="Area2D" parent="." node_paths=PackedStringArray("troop", "hitbox_data")]
+[node name="Sword" type="Area2D" parent="." node_paths=PackedStringArray("troop", "sprite", "hitbox_data")]
 script = ExtResource("10_h06ut")
 troop = NodePath("..")
+sprite = NodePath("Sprite2D")
 hitbox_data = NodePath("HitboxData")
 
 [node name="HitboxData" type="Node" parent="Sword"]
@@ -238,11 +400,12 @@ script = ExtResource("7_lrbaa")
 damage = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sword"]
-position = Vector2(14, 0)
+position = Vector2(10.75, 0)
 shape = SubResource("RectangleShape2D_bco73")
 
 [node name="Sprite2D" type="Sprite2D" parent="Sword"]
-position = Vector2(14, 0)
+z_index = 1
+position = Vector2(10, 0)
 texture = ExtResource("11_5l4oe")
 
 [connection signal="damaged" from="Hurtbox" to="." method="_on_hurtbox_damaged"]
