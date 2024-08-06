@@ -6,7 +6,7 @@ var target: Node2D
 
 func _ready() -> void:
 	super._ready()
-	sprite.visible = false
+	disable()
 
 func enable() -> void:
 	super.enable()

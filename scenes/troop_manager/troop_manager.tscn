@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://b07yhuwx4dkdn"]
 
 [ext_resource type="Script" path="res://scenes/troop_manager/troop_manager.gd" id="1_xf0ym"]
-[ext_resource type="PackedScene" uid="uid://clindq3qmowxv" path="res://scenes/troop/knight/knight.tscn" id="2_g31bs"]
 [ext_resource type="Script" path="res://scenes/troop_manager/commander.gd" id="3_5kffa"]
+[ext_resource type="PackedScene" uid="uid://e16ae5mlhn1c" path="res://scenes/troop/knight/knight_beehave.tscn" id="4_alfgb"]
 [ext_resource type="Script" path="res://scenes/troop_manager/factory.gd" id="4_pqo8y"]
 [ext_resource type="PackedScene" uid="uid://bx0y1mftce4uq" path="res://scenes/troop/archer/archer.tscn" id="5_mip3s"]
 
@@ -14,7 +14,7 @@ script = ExtResource("3_5kffa")
 
 [node name="Factory" type="Node" parent="."]
 script = ExtResource("4_pqo8y")
-knight_scene = ExtResource("2_g31bs")
+knight_scene = ExtResource("4_alfgb")
 archer_scene = ExtResource("5_mip3s")
 
 [connection signal="troop_detectors_provided" from="." to="Commander" method="_on_troop_manager_troop_detectors_provided"]

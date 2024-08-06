@@ -8,7 +8,9 @@ class_name Troop extends Entity
 
 var troop_owner: Node2D
 var following_owner_target_position_offset: Vector2
-var speed: float
+var speed: int
+var target: Node2D
+var range: int
 
 var hitbox_layer: int
 var hurtbox_layer: int
@@ -31,12 +33,10 @@ func initialize_with(troop_owner: Node2D, hitbox_layer: int, hurtbox_layer: int,
 	self.position = troop_owner.position + self.following_owner_target_position_offset
 
 func attack_target(target: Node2D) -> void:
-	#state_machine.change_to_state(attack_state.state_name, {target: target})
-	ordered_to_attack.emit(target)
+	self.target = target
 	
 func follow_owner() -> void:
-	#state_machine.change_to_state(follow_leader_state.state_name, {})
-	ordered_to_follow_leader.emit()
+	self.target = troop_owner
 
 func set_hurtbox_layer(layer: int) -> void:
 	hurtbox_layer = layer
