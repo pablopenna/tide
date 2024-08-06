@@ -2,7 +2,6 @@ extends ActionLeaf
 
 @export var animation_player: AnimationPlayer
 var troop: Troop
-var accepted_distance_to_target_position: int = 10
 
 func before_run(actor: Node, blackboard: Blackboard) -> void:
 	troop = actor as Troop
@@ -12,7 +11,7 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 		return FAILURE
 	if not TargetUtils.is_target_in_range(troop):
 		_process_animation()
-		MovementUtils.go_to_target_position(troop, troop.target, Vector2.ZERO, accepted_distance_to_target_position)
+		MovementUtils.go_to_target_position(troop, troop.target, Vector2.ZERO, troop.range)
 		return RUNNING
 	return SUCCESS
 

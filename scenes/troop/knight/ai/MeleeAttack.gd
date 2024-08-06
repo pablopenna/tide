@@ -10,11 +10,14 @@ func before_run(actor: Node, blackboard: Blackboard) -> void:
 	sword.target = troop.target
 
 func after_run(actor: Node, blackboard: Blackboard) -> void:
+	animation_player.stop(true)
 	sword.disable()
 
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	if not TargetUtils.has_target(troop):
 		return SUCCESS
+	if not TargetUtils.is_target_in_range(troop):
+		return FAILURE
 	_process_animation()
 	return RUNNING
 

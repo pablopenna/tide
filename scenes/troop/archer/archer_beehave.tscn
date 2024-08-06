@@ -1,0 +1,234 @@
+[gd_scene load_steps=33 format=3 uid="uid://gu0vel5nku17"]
+
+[ext_resource type="Script" path="res://scenes/troop/archer/archer.gd" id="1_x1bns"]
+[ext_resource type="PackedScene" uid="uid://b8yls0byl10aq" path="res://scenes/projectile/projectile_shooter.tscn" id="5_a73f8"]
+[ext_resource type="PackedScene" uid="uid://vti62y788f5n" path="res://scenes/projectile/projectile.tscn" id="6_wj56q"]
+[ext_resource type="PackedScene" uid="uid://bwh3ymoxbgi4h" path="res://scenes/health_points_manager/health_points_manager.tscn" id="8_6hism"]
+[ext_resource type="PackedScene" uid="uid://m4h80v367bd7" path="res://scenes/hurtbox/hurtbox.tscn" id="9_ujohv"]
+[ext_resource type="Texture2D" uid="uid://qmaag64jvvpr" path="res://sprites/samples/blowharder.png" id="10_dyy2y"]
+[ext_resource type="Shader" path="res://shaders/beehave_troop.gdshader" id="10_edimi"]
+[ext_resource type="Script" path="res://scenes/entity/animated_sprite_rotating_with_face_direction.gd" id="11_x6e76"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="13_yfmh6"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="14_78t0t"]
+[ext_resource type="Script" path="res://scenes/troop/common/ai/FollowLeader.gd" id="14_awgmk"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="15_xc4rk"]
+[ext_resource type="Script" path="res://scenes/troop/common/ai/GetInRange.gd" id="16_bwcbn"]
+[ext_resource type="Script" path="res://scenes/troop/archer/ai/shoot.gd" id="17_nghj7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i84y6"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y572c"]
+size = Vector2(16, 16)
+
+[sub_resource type="Animation" id="Animation_bk6td"]
+resource_name = "idle_down"
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_7l3dm"]
+resource_name = "walk_down"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 2]
+}
+
+[sub_resource type="Animation" id="Animation_qstao"]
+resource_name = "walk_right"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 3, 5]
+}
+
+[sub_resource type="Animation" id="Animation_3tevl"]
+resource_name = "walk_up"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 6, 8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gjbjg"]
+_data = {
+"idle_down": SubResource("Animation_bk6td"),
+"walk_down": SubResource("Animation_7l3dm"),
+"walk_right": SubResource("Animation_qstao"),
+"walk_up": SubResource("Animation_3tevl")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eedyl"]
+shader = ExtResource("10_edimi")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8jlr"]
+atlas = ExtResource("10_dyy2y")
+region = Rect2(736, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_118p2"]
+atlas = ExtResource("10_dyy2y")
+region = Rect2(752, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_311cm"]
+atlas = ExtResource("10_dyy2y")
+region = Rect2(768, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_man2h"]
+atlas = ExtResource("10_dyy2y")
+region = Rect2(784, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2y8k"]
+atlas = ExtResource("10_dyy2y")
+region = Rect2(800, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhny1"]
+atlas = ExtResource("10_dyy2y")
+region = Rect2(816, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_58hqb"]
+atlas = ExtResource("10_dyy2y")
+region = Rect2(832, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xkhhb"]
+atlas = ExtResource("10_dyy2y")
+region = Rect2(848, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dvp7g"]
+atlas = ExtResource("10_dyy2y")
+region = Rect2(864, 128, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yyko6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8jlr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_118p2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_311cm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_man2h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2y8k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fhny1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_58hqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xkhhb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dvp7g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Archer" type="CharacterBody2D" node_paths=PackedStringArray("projectile_shooter", "state_machine", "hp_manager", "attack_state", "follow_leader_state", "hurtbox")]
+collision_layer = 0
+collision_mask = 2
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_x1bns")
+projectile_shooter = NodePath("ProjectileShooter")
+state_machine = NodePath("")
+hp_manager = NodePath("HealthPointsManager")
+attack_state = NodePath("")
+follow_leader_state = NodePath("")
+hurtbox = NodePath("Hurtbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_i84y6")
+
+[node name="Hurtbox" parent="." instance=ExtResource("9_ujohv")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_y572c")
+
+[node name="HealthPointsManager" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("8_6hism")]
+hurtbox = NodePath("../Hurtbox")
+health = 5
+
+[node name="ProjectileShooter" parent="." instance=ExtResource("5_a73f8")]
+projectileScene = ExtResource("6_wj56q")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gjbjg")
+}
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("entity")]
+material = SubResource("ShaderMaterial_eedyl")
+sprite_frames = SubResource("SpriteFrames_yyko6")
+frame = 3
+script = ExtResource("11_x6e76")
+entity = NodePath("..")
+
+[node name="ArcherAI" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("13_yfmh6")
+blackboard = NodePath("@Node@50140")
+actor = NodePath("..")
+
+[node name="SelectorComposite" type="Node" parent="ArcherAI"]
+script = ExtResource("14_78t0t")
+
+[node name="Shoot" type="Node" parent="ArcherAI/SelectorComposite"]
+script = ExtResource("15_xc4rk")
+
+[node name="GetInRange" type="Node" parent="ArcherAI/SelectorComposite/Shoot" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("16_bwcbn")
+animation_player = NodePath("../../../../AnimationPlayer")
+
+[node name="Shoot" type="Node" parent="ArcherAI/SelectorComposite/Shoot" node_paths=PackedStringArray("projectile_shooter")]
+script = ExtResource("17_nghj7")
+projectile_shooter = NodePath("../../../../ProjectileShooter")
+
+[node name="FollowLeader" type="Node" parent="ArcherAI/SelectorComposite" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("14_awgmk")
+animation_player = NodePath("../../../AnimationPlayer")

@@ -27,5 +27,5 @@ func _process(delta) -> void:
 			#rotation = PI/2
 		#Vector2.LEFT:
 			#rotation = PI
-	if is_enabled and target:
+	if is_enabled and target != null and troop != null:
 		rotation = global_position.angle_to_point(target.global_position)
