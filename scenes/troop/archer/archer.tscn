@@ -1,16 +1,18 @@
-[gd_scene load_steps=29 format=3 uid="uid://bx0y1mftce4uq"]
+[gd_scene load_steps=31 format=3 uid="uid://gu0vel5nku17"]
 
 [ext_resource type="Script" path="res://scenes/troop/archer/archer.gd" id="1_8q2fw"]
-[ext_resource type="Script" path="res://states/state_manager.gd" id="3_b7pk8"]
-[ext_resource type="Script" path="res://scenes/troop/common/states/follow_leader.gd" id="4_3nm1n"]
-[ext_resource type="Script" path="res://scenes/troop/archer/state/shoot.gd" id="5_4wuus"]
 [ext_resource type="PackedScene" uid="uid://b8yls0byl10aq" path="res://scenes/projectile/projectile_shooter.tscn" id="6_gffve"]
 [ext_resource type="PackedScene" uid="uid://vti62y788f5n" path="res://scenes/projectile/projectile.tscn" id="7_5as5o"]
-[ext_resource type="Script" path="res://scenes/troop/common/states/get_in_range.gd" id="8_hjki4"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="8_g8m58"]
 [ext_resource type="PackedScene" uid="uid://m4h80v367bd7" path="res://scenes/hurtbox/hurtbox.tscn" id="8_xja6d"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="9_oktfh"]
 [ext_resource type="Texture2D" uid="uid://qmaag64jvvpr" path="res://sprites/samples/blowharder.png" id="10_pijlu"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="10_vkssr"]
+[ext_resource type="Script" path="res://scenes/troop/common/ai/GetInRange.gd" id="11_0p7a3"]
 [ext_resource type="PackedScene" uid="uid://bwh3ymoxbgi4h" path="res://scenes/health_points_manager/health_points_manager.tscn" id="11_8eii5"]
 [ext_resource type="Script" path="res://scenes/entity/animated_sprite_rotating_with_face_direction.gd" id="11_nr4sf"]
+[ext_resource type="Script" path="res://scenes/troop/archer/ai/Shoot.gd" id="12_8j6vx"]
+[ext_resource type="Script" path="res://scenes/troop/common/ai/FollowLeader.gd" id="13_56vun"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i84y6"]
 size = Vector2(16, 16)
@@ -164,54 +166,30 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Archer" type="CharacterBody2D" node_paths=PackedStringArray("projectile_shooter", "state_machine", "hp_manager", "attack_state", "follow_leader_state", "hurtbox")]
+[node name="Archer" type="CharacterBody2D" node_paths=PackedStringArray("projectile_shooter", "hp_manager", "hurtbox")]
 collision_layer = 0
 collision_mask = 2
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_8q2fw")
-projectile_shooter = NodePath("StateMachine/Shoot/ProjectileShooter")
-state_machine = NodePath("StateMachine")
+projectile_shooter = NodePath("ProjectileShooter")
 hp_manager = NodePath("HealthPointsManager")
-attack_state = NodePath("StateMachine/Shoot")
-follow_leader_state = NodePath("StateMachine/FollowLeader")
 hurtbox = NodePath("Hurtbox")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_i84y6")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "managed_entity")]
-script = ExtResource("3_b7pk8")
-initial_state = NodePath("FollowLeader")
-managed_entity = NodePath("..")
+[node name="Hurtbox" parent="." instance=ExtResource("8_xja6d")]
 
-[node name="FollowLeader" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_state", "animation_player")]
-script = ExtResource("4_3nm1n")
-attack_state = NodePath("../Shoot")
-animation_player = NodePath("../../AnimationPlayer")
-
-[node name="Shoot" type="Node" parent="StateMachine" node_paths=PackedStringArray("projectile_shooter", "get_in_range_state", "follow_leader_state")]
-script = ExtResource("5_4wuus")
-projectile_shooter = NodePath("ProjectileShooter")
-get_in_range_state = NodePath("../GetInRange")
-follow_leader_state = NodePath("../FollowLeader")
-
-[node name="ProjectileShooter" parent="StateMachine/Shoot" instance=ExtResource("6_gffve")]
-projectileScene = ExtResource("7_5as5o")
-
-[node name="GetInRange" type="Node" parent="StateMachine" node_paths=PackedStringArray("shoot_state", "follow_leader_state")]
-script = ExtResource("8_hjki4")
-shoot_state = NodePath("../Shoot")
-follow_leader_state = NodePath("../FollowLeader")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_y572c")
 
 [node name="HealthPointsManager" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("11_8eii5")]
 hurtbox = NodePath("../Hurtbox")
 health = 5
 
-[node name="Hurtbox" parent="." instance=ExtResource("8_xja6d")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-shape = SubResource("RectangleShape2D_y572c")
+[node name="ProjectileShooter" parent="." instance=ExtResource("6_gffve")]
+projectileScene = ExtResource("7_5as5o")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -223,3 +201,26 @@ sprite_frames = SubResource("SpriteFrames_yyko6")
 frame = 3
 script = ExtResource("11_nr4sf")
 entity = NodePath("..")
+
+[node name="ArcherAI" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("8_g8m58")
+blackboard = NodePath("@Node@23255")
+actor = NodePath("..")
+
+[node name="SelectorComposite" type="Node" parent="ArcherAI"]
+script = ExtResource("9_oktfh")
+
+[node name="Shoot" type="Node" parent="ArcherAI/SelectorComposite"]
+script = ExtResource("10_vkssr")
+
+[node name="GetInRange" type="Node" parent="ArcherAI/SelectorComposite/Shoot" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("11_0p7a3")
+animation_player = NodePath("../../../../AnimationPlayer")
+
+[node name="Shoot" type="Node" parent="ArcherAI/SelectorComposite/Shoot" node_paths=PackedStringArray("projectile_shooter")]
+script = ExtResource("12_8j6vx")
+projectile_shooter = NodePath("../../../../ProjectileShooter")
+
+[node name="FollowLeader" type="Node" parent="ArcherAI/SelectorComposite" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("13_56vun")
+animation_player = NodePath("../../../AnimationPlayer")

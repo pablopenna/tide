@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scenes/troop_manager/troop_manager.gd" id="1_xf0ym"]
 [ext_resource type="Script" path="res://scenes/troop_manager/commander.gd" id="3_5kffa"]
-[ext_resource type="PackedScene" uid="uid://e16ae5mlhn1c" path="res://scenes/troop/knight/knight_beehave.tscn" id="4_alfgb"]
+[ext_resource type="PackedScene" uid="uid://e16ae5mlhn1c" path="res://scenes/troop/knight/knight.tscn" id="4_alfgb"]
 [ext_resource type="Script" path="res://scenes/troop_manager/factory.gd" id="4_pqo8y"]
-[ext_resource type="PackedScene" uid="uid://gu0vel5nku17" path="res://scenes/troop/archer/archer_beehave.tscn" id="5_ln8il"]
+[ext_resource type="PackedScene" uid="uid://gu0vel5nku17" path="res://scenes/troop/archer/archer.tscn" id="5_ln8il"]
 
 [node name="TroopManager" type="Node"]
 script = ExtResource("1_xf0ym")
