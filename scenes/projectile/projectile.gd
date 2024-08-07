@@ -1,6 +1,9 @@
 class_name Projectile extends Hitbox
 
-var direction
+var direction: Vector2:
+	set(value):
+		direction = value
+		rotation = Vector2.UP.angle_to(value)
 var speed
 var damage
 
@@ -10,7 +13,7 @@ func _ready():
 	super._ready()
 	hitbox_data.damage = damage
 
-func _process(delta):
+func _physics_process(delta) -> void:
 	position += direction * speed * delta
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
