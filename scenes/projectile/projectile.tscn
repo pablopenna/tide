@@ -1,22 +1,23 @@
 [gd_scene load_steps=5 format=3 uid="uid://vti62y788f5n"]
 
 [ext_resource type="Script" path="res://scenes/projectile/projectile.gd" id="1_rg803"]
-[ext_resource type="Texture2D" uid="uid://bq8np3qusaakl" path="res://sprites/troop.png" id="2_heso0"]
+[ext_resource type="Texture2D" uid="uid://cfhl44drghe81" path="res://sprites/arrow.png" id="2_dng63"]
 [ext_resource type="Script" path="res://scenes/hitbox/hitbox_data.gd" id="3_qhypv"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wunw6"]
-size = Vector2(2, 16)
+[sub_resource type="CircleShape2D" id="CircleShape2D_vxmbm"]
+radius = 2.0
 
 [node name="Projectile" type="Area2D" node_paths=PackedStringArray("hitbox_data")]
 script = ExtResource("1_rg803")
 hitbox_data = NodePath("HitboxData")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.2, 1)
-texture = ExtResource("2_heso0")
+position = Vector2(0, 3)
+rotation = 4.71239
+texture = ExtResource("2_dng63")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_wunw6")
+shape = SubResource("CircleShape2D_vxmbm")
 
 [node name="HitboxData" type="Node" parent="."]
 script = ExtResource("3_qhypv")
