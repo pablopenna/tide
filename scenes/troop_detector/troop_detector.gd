@@ -1,6 +1,6 @@
 class_name TroopDetector extends ShapeCast2D
 
-@export var owner_entity: Entity
+@export var owner_entity: Node2D
 var default_direction: Vector2 = Vector2.RIGHT
 var current_direction: Vector2
 
@@ -14,7 +14,11 @@ func _process(delta: float) -> void:
 	_process_collisions()
 	
 func _rotate_to_match_entity_direction() -> void:
-	var entity_direction: Vector2 = owner_entity.velocity.normalized()
+	var entity_direction: Vector2
+	if owner_entity as Entity != null:
+		entity_direction = owner_entity.velocity.normalized()
+	else:
+		entity_direction = Vector2.RIGHT
 	var rotation_diff: float = current_direction.angle_to(entity_direction)
 	
 	rotate(rotation_diff)

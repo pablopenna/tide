@@ -1,5 +1,6 @@
-class_name TroopManager extends Node
+class_name TroopManager extends Node2D
 
+@export var faction: FactionUtils.Faction
 @export var troop_owner: Entity
 @export var troop_detectors: Array[TroopDetector]
 @export_flags_2d_physics var troops_hitbox_layer_scanned: int
