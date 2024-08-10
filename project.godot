@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Tide"
-run/main_scene="res://scenes/debug_scene.tscn"
+run/main_scene="res://scenes/iteration_1.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 run/max_fps=60
 boot_splash/use_filter=false

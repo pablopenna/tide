@@ -39,7 +39,9 @@ func _create_troop(troop_scene: PackedScene):
 	
 	troops.append(new_troop)
 	new_troop.died.connect(_process_troop_death)
-	add_child(new_troop)
+	# Even if ancestor node has Y sorting enabled, does not work if parent of troop is a Node
+	# This should instantiate the troop at the same level of the troop owner in the tree
+	get_parent().get_parent().get_parent().add_child(new_troop)
 	
 func _process_troop_death(dead_troop: Troop):
 	troops.erase(dead_troop)

@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://cmxyconummrk8"]
+[gd_scene load_steps=14 format=3 uid="uid://cmxyconummrk8"]
 
-[ext_resource type="Texture2D" uid="uid://dixmbr8nug28q" path="res://sprites/player.png" id="1_2o7nc"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_n50c0"]
-[ext_resource type="Script" path="res://states/state_manager.gd" id="3_3uexm"]
-[ext_resource type="Script" path="res://scenes/player/states/default_state.gd" id="4_etbcj"]
+[ext_resource type="Texture2D" uid="uid://bqtqodwl8bqmd" path="res://sprites/playerv2.png" id="2_x0ljm"]
+[ext_resource type="Script" path="res://scenes/entity/sprite_rotating_with_face_direction.gd" id="3_u4ihy"]
 [ext_resource type="PackedScene" uid="uid://b07yhuwx4dkdn" path="res://scenes/troop_manager/troop_manager.tscn" id="5_53p1u"]
 [ext_resource type="PackedScene" uid="uid://dfemqxgdpiugb" path="res://scenes/troop_detector/troop_detector.tscn" id="6_r46j7"]
 [ext_resource type="Shape2D" uid="uid://cwk0rjafs6j5e" path="res://scenes/troop_detector/cone.tres" id="7_gg1ut"]
@@ -12,26 +11,105 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_od5lt"]
 size = Vector2(16, 16)
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="Animation" id="Animation_1r77t"]
+resource_name = "idle_down"
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_5oj7w"]
+resource_name = "walk_down"
+length = 1.00001
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 2]
+}
+
+[sub_resource type="Animation" id="Animation_werfg"]
+resource_name = "walk_right"
+length = 1.00001
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 3, 5]
+}
+
+[sub_resource type="Animation" id="Animation_gsebh"]
+resource_name = "walk_up"
+length = 1.00001
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 6, 8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1hct8"]
+_data = {
+"idle_down": SubResource("Animation_1r77t"),
+"walk_down": SubResource("Animation_5oj7w"),
+"walk_right": SubResource("Animation_werfg"),
+"walk_up": SubResource("Animation_gsebh")
+}
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("troop_manager", "animation_player")]
 collision_mask = 10
 motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_n50c0")
+troop_manager = NodePath("TroopManager")
+animation_player = NodePath("AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_od5lt")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_2o7nc")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1hct8")
+}
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "managed_entity")]
-script = ExtResource("3_3uexm")
-initial_state = NodePath("default")
-managed_entity = NodePath("..")
-
-[node name="default" type="Node" parent="StateMachine" node_paths=PackedStringArray("troop_manager")]
-script = ExtResource("4_etbcj")
-speed = 300.0
-troop_manager = NodePath("../../TroopManager")
+[node name="Sprite2D" type="Sprite2D" parent="." node_paths=PackedStringArray("entity")]
+texture = ExtResource("2_x0ljm")
+hframes = 9
+script = ExtResource("3_u4ihy")
+entity = NodePath("..")
 
 [node name="TroopManager" parent="." node_paths=PackedStringArray("troop_owner", "troop_detectors") instance=ExtResource("5_53p1u")]
 troop_owner = NodePath("..")

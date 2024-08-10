@@ -1,1 +1,35 @@
 extends Entity
+
+@export var speed: float = 200
+var input: Vector2
+@export var troop_manager: TroopManager
+@export var animation_player: AnimationPlayer
+
+func _ready() -> void:
+	input = Vector2.ZERO
+
+func _process(_delta: float) -> void:
+	_process_input()
+	_process_animation()
+	velocity = input * speed
+
+func _process_input() -> void:
+	var raw_input: Vector2 = Vector2(Input.get_axis("ui_left","ui_right"), Input.get_axis("ui_up","ui_down"))
+	input = raw_input.normalized()
+	
+	if Input.is_action_just_pressed("player_troop_add_knight"):
+		troop_manager.create_knight()
+	if Input.is_action_just_pressed("player_troop_add_archer"):
+		troop_manager.create_archer()
+	if Input.is_action_just_pressed("player_troop_regroup"):
+		troop_manager.make_troops_follow_leader()
+
+func _process_animation() -> void:
+	if velocity == Vector2.ZERO:
+		animation_player.play("idle_down")
+	elif facing_direction == Vector2.UP:
+		animation_player.play("walk_up")
+	elif facing_direction == Vector2.DOWN:
+		animation_player.play("walk_down")
+	else:
+		animation_player.play("walk_right")

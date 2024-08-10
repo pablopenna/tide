@@ -133,18 +133,6 @@ tracks/1/keys = {
 "method": &"enable"
 }]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sword/Sprite2D:z_index")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2]
-}
 
 [sub_resource type="Animation" id="Animation_2tpqx"]
 resource_name = "attack_right"
@@ -180,18 +168,6 @@ tracks/1/keys = {
 "method": &"enable"
 }]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sword/Sprite2D:z_index")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2]
-}
 
 [sub_resource type="Animation" id="Animation_00rqt"]
 resource_name = "attack_up"
@@ -226,18 +202,6 @@ tracks/1/keys = {
 "args": [],
 "method": &"enable"
 }]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sword/Sprite2D:z_index")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_e608t"]
@@ -324,7 +288,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bco73"]
 size = Vector2(21.5, 4)
 
-[node name="BeeKnight" type="CharacterBody2D" node_paths=PackedStringArray("hp_manager", "hurtbox", "hitbox")]
+[node name="Knight" type="CharacterBody2D" node_paths=PackedStringArray("hp_manager", "hurtbox", "hitbox")]
 collision_layer = 0
 collision_mask = 2
 motion_mode = 1
@@ -347,7 +311,6 @@ health = 40
 shape = SubResource("RectangleShape2D_y572c")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("entity")]
-z_index = 1
 sprite_frames = SubResource("SpriteFrames_dho33")
 frame = 1
 script = ExtResource("10_0kxat")
@@ -373,13 +336,12 @@ position = Vector2(10.75, 0)
 shape = SubResource("RectangleShape2D_bco73")
 
 [node name="Sprite2D" type="Sprite2D" parent="Sword"]
-z_index = 1
 position = Vector2(10, 0)
 texture = ExtResource("11_5l4oe")
 
 [node name="KnightAI" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("9_p1604")
-blackboard = NodePath("@Node@24734")
+blackboard = NodePath("@Node@50223")
 actor = NodePath("..")
 
 [node name="SelectorComposite" type="Node" parent="KnightAI"]
