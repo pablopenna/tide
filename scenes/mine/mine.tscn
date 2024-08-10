@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://caghr8ajmt6ea"]
+
+[ext_resource type="Texture2D" uid="uid://qmaag64jvvpr" path="res://sprites/samples/blowharder.png" id="1_hnavn"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1aaa2"]
+texture = ExtResource("1_hnavn")
+69:25/0 = 0
+69:26/0 = 0
+70:26/0 = 0
+70:25/0 = 0
+70:24/0 = 0
+71:24/0 = 0
+72:24/0 = 0
+72:25/0 = 0
+72:26/0 = 0
+71:26/0 = 0
+71:25/0 = 0
+73:24/0 = 0
+74:24/0 = 0
+74:25/0 = 0
+73:25/0 = 0
+69:24/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_5pwyh"]
+sources/0 = SubResource("TileSetAtlasSource_1aaa2")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_siikp"]
+radius = 40.0
+
+[node name="Mine" type="Area2D"]
+position = Vector2(-16, -16)
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(8, 8)
+tile_set = SubResource("TileSet_5pwyh")
+format = 2
+layer_0/tile_data = PackedInt32Array(131074, 4653056, 25, 196610, 4784128, 25, 262146, 4784128, 25, 131075, 4784128, 25, 196611, 4784128, 25, 262147, 4849664, 24, 131076, 4849664, 24, 196612, 4653056, 25, 262148, 4784128, 24, 131073, 4587520, 25, 196609, 4587520, 25, 262145, 4587520, 25, 327681, 4587520, 26, 327682, 4653056, 26, 327683, 4653056, 26, 327684, 4653056, 26, 327685, 4718592, 26, 262149, 4718592, 25, 196613, 4718592, 25, 131077, 4718592, 25, 65540, 4653056, 24, 65539, 4653056, 24, 65538, 4653056, 24, 65537, 4587520, 24, 65541, 4718592, 24, 0, 4521984, 24, 65536, 4521984, 26, 131072, 4521984, 25, 196608, 4521984, 26, 262144, 4521984, 24, 327680, 4521984, 24, 393216, 4521984, 26, 393217, 4521984, 25, 393218, 4521984, 25, 393219, 4521984, 25, 393220, 4521984, 25, 393221, 4521984, 24, 393222, 4521984, 26, 327686, 4521984, 24, 262150, 4521984, 26, 196614, 4521984, 26, 131078, 4521984, 25, 65542, 4521984, 25, 6, 4521984, 26, 5, 4521984, 24, 4, 4521984, 25, 3, 4521984, 24, 2, 4521984, 26, 1, 4521984, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(64, 62)
+shape = SubResource("CircleShape2D_siikp")
