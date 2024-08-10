@@ -1,12 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://cmxyconummrk8"]
+[gd_scene load_steps=17 format=3 uid="uid://cmxyconummrk8"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_n50c0"]
 [ext_resource type="Texture2D" uid="uid://bqtqodwl8bqmd" path="res://sprites/playerv2.png" id="2_x0ljm"]
 [ext_resource type="Script" path="res://scenes/entity/sprite_rotating_with_face_direction.gd" id="3_u4ihy"]
-[ext_resource type="PackedScene" uid="uid://b07yhuwx4dkdn" path="res://scenes/troop_manager/troop_manager.tscn" id="5_53p1u"]
 [ext_resource type="PackedScene" uid="uid://dfemqxgdpiugb" path="res://scenes/troop_detector/troop_detector.tscn" id="6_r46j7"]
 [ext_resource type="Shape2D" uid="uid://cwk0rjafs6j5e" path="res://scenes/troop_detector/cone.tres" id="7_gg1ut"]
 [ext_resource type="Shape2D" uid="uid://chmhxpv1tkndp" path="res://scenes/troop_detector/circle.tres" id="8_3rp2t"]
+[ext_resource type="PackedScene" uid="uid://cc03llx0grfnv" path="res://scenes/troop_manager/troop_tracker.tscn" id="8_mux8n"]
+[ext_resource type="PackedScene" uid="uid://dant4e2ymqfe" path="res://scenes/troop_manager/troop_commander.tscn" id="9_d5esl"]
+[ext_resource type="PackedScene" uid="uid://cus6nroawtds1" path="res://scenes/troop_manager/location_detector.tscn" id="10_8tljl"]
+[ext_resource type="PackedScene" uid="uid://ccypnmryyq73r" path="res://scenes/troop_manager/troop_factory.tscn" id="10_h3u77"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_od5lt"]
 size = Vector2(16, 16)
@@ -89,12 +92,13 @@ _data = {
 "walk_up": SubResource("Animation_gsebh")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("troop_manager", "animation_player")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("commander", "factory", "animation_player")]
 collision_mask = 10
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_n50c0")
-troop_manager = NodePath("TroopManager")
+commander = NodePath("TroopCommander")
+factory = NodePath("TroopFactory")
 animation_player = NodePath("AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -111,12 +115,6 @@ hframes = 9
 script = ExtResource("3_u4ihy")
 entity = NodePath("..")
 
-[node name="TroopManager" parent="." node_paths=PackedStringArray("troop_owner", "troop_detectors") instance=ExtResource("5_53p1u")]
-troop_owner = NodePath("..")
-troop_detectors = [NodePath("../TroopDetector"), NodePath("../TroopDetector2")]
-troops_hitbox_layer_scanned = 512
-troops_hurtbox_layer = 256
-
 [node name="TroopDetector" parent="." node_paths=PackedStringArray("owner_entity") instance=ExtResource("6_r46j7")]
 shape = ExtResource("7_gg1ut")
 collision_mask = 512
@@ -126,3 +124,15 @@ owner_entity = NodePath("..")
 shape = ExtResource("8_3rp2t")
 collision_mask = 512
 owner_entity = NodePath("..")
+
+[node name="TroopTracker" parent="." node_paths=PackedStringArray("factory") instance=ExtResource("8_mux8n")]
+factory = NodePath("../TroopFactory")
+
+[node name="TroopCommander" parent="." node_paths=PackedStringArray("troop_detectors", "troops") instance=ExtResource("9_d5esl")]
+troop_detectors = [NodePath("../TroopDetector"), NodePath("../TroopDetector2")]
+troops = NodePath("../TroopTracker")
+
+[node name="TroopFactory" parent="." node_paths=PackedStringArray("troop_owner") instance=ExtResource("10_h3u77")]
+troop_owner = NodePath("..")
+
+[node name="LocationDetector" parent="." instance=ExtResource("10_8tljl")]

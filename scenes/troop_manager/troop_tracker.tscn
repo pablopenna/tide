@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cc03llx0grfnv"]
+
+[ext_resource type="Script" path="res://scenes/troop_manager/troop_tracker.gd" id="1_u1wjd"]
+
+[node name="TroopTracker" type="Node"]
+script = ExtResource("1_u1wjd")

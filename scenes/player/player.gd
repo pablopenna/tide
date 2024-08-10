@@ -2,7 +2,8 @@ extends Entity
 
 @export var speed: float = 200
 var input: Vector2
-@export var troop_manager: TroopManager
+@export var commander: TroopCommander
+@export var factory: TroopFactory
 @export var animation_player: AnimationPlayer
 
 func _ready() -> void:
@@ -18,11 +19,11 @@ func _process_input() -> void:
 	input = raw_input.normalized()
 	
 	if Input.is_action_just_pressed("player_troop_add_knight"):
-		troop_manager.create_knight()
+		factory.create_knight()
 	if Input.is_action_just_pressed("player_troop_add_archer"):
-		troop_manager.create_archer()
+		factory.create_archer()
 	if Input.is_action_just_pressed("player_troop_regroup"):
-		troop_manager.make_troops_follow_leader()
+		commander.make_troops_follow_leader()
 
 func _process_animation() -> void:
 	if velocity == Vector2.ZERO:

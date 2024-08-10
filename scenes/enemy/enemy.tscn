@@ -1,20 +1,25 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctixulb3yg747"]
+[gd_scene load_steps=11 format=3 uid="uid://ctixulb3yg747"]
 
 [ext_resource type="Script" path="res://scenes/enemy/enemy.gd" id="1_5m6ue"]
 [ext_resource type="Texture2D" uid="uid://di0boo8jtpvth" path="res://sprites/enemy.png" id="2_ja4re"]
-[ext_resource type="PackedScene" uid="uid://b07yhuwx4dkdn" path="res://scenes/troop_manager/troop_manager.tscn" id="3_oby0l"]
 [ext_resource type="PackedScene" uid="uid://dfemqxgdpiugb" path="res://scenes/troop_detector/troop_detector.tscn" id="4_k6yqj"]
 [ext_resource type="Shape2D" uid="uid://chmhxpv1tkndp" path="res://scenes/troop_detector/circle.tres" id="5_8t5rd"]
+[ext_resource type="PackedScene" uid="uid://cc03llx0grfnv" path="res://scenes/troop_manager/troop_tracker.tscn" id="6_m5mns"]
 [ext_resource type="Shape2D" uid="uid://cwk0rjafs6j5e" path="res://scenes/troop_detector/cone.tres" id="6_whw56"]
+[ext_resource type="PackedScene" uid="uid://ccypnmryyq73r" path="res://scenes/troop_manager/troop_factory.tscn" id="7_o7brj"]
+[ext_resource type="PackedScene" uid="uid://dant4e2ymqfe" path="res://scenes/troop_manager/troop_commander.tscn" id="8_sfk7j"]
+[ext_resource type="PackedScene" uid="uid://cus6nroawtds1" path="res://scenes/troop_manager/location_detector.tscn" id="9_628ji"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_10huh"]
 size = Vector2(16, 16)
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("factory")]
 collision_layer = 8
 collision_mask = 3
 motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_5m6ue")
+factory = NodePath("TroopFactory")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_10huh")
@@ -22,18 +27,25 @@ shape = SubResource("RectangleShape2D_10huh")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_ja4re")
 
-[node name="TroopManager" parent="." node_paths=PackedStringArray("troop_owner", "troop_detectors") instance=ExtResource("3_oby0l")]
-troop_owner = NodePath("..")
+[node name="TroopCommander" parent="." node_paths=PackedStringArray("troop_detectors", "troops") instance=ExtResource("8_sfk7j")]
 troop_detectors = [NodePath("../TroopDetector"), NodePath("../TroopDetector2")]
-troops_hitbox_layer_scanned = 256
-troops_hurtbox_layer = 512
+troops = NodePath("../TroopTracker")
 
 [node name="TroopDetector" parent="." node_paths=PackedStringArray("owner_entity") instance=ExtResource("4_k6yqj")]
 shape = ExtResource("5_8t5rd")
-collision_mask = 256
+collision_mask = 384
 owner_entity = NodePath("..")
 
 [node name="TroopDetector2" parent="." node_paths=PackedStringArray("owner_entity") instance=ExtResource("4_k6yqj")]
 shape = ExtResource("6_whw56")
-collision_mask = 256
+collision_mask = 384
 owner_entity = NodePath("..")
+
+[node name="TroopTracker" parent="." node_paths=PackedStringArray("factory") instance=ExtResource("6_m5mns")]
+factory = NodePath("../TroopFactory")
+
+[node name="TroopFactory" parent="." node_paths=PackedStringArray("troop_owner") instance=ExtResource("7_o7brj")]
+troop_owner = NodePath("..")
+faction = 1
+
+[node name="LocationHandler" parent="." instance=ExtResource("9_628ji")]

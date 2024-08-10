@@ -1,5 +1,7 @@
 extends Area2D
 
+signal mine_detected(mine: Mine)
+
 func _ready() -> void:
 	area_entered.connect(_on_location_interact)
 	
@@ -11,3 +13,4 @@ func _process_mine(area: Area2D) -> void:
 	if mine == null:
 		return
 	print("I'm in a mine")
+	mine_detected.emit(mine)

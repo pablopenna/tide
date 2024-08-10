@@ -10,6 +10,7 @@ const ENEMY_HITBOX: String = "enemy_hitbox"
 const PLAYER_HURTBOX: String = "player_hurtbox"
 const ALLY_HURTBOX: String = "ally_hurtbox"
 const ENEMY_HURTBOX: String = "enemy_hurtbox"
+const LOCATION: String = "location"
 #endregion
 
 var _layers_dict: Dictionary

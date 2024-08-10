@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://caghr8ajmt6ea"]
+[gd_scene load_steps=11 format=3 uid="uid://caghr8ajmt6ea"]
 
 [ext_resource type="Script" path="res://scenes/mine/mine.gd" id="1_bdrik"]
 [ext_resource type="Texture2D" uid="uid://qmaag64jvvpr" path="res://sprites/samples/blowharder.png" id="1_hnavn"]
-[ext_resource type="PackedScene" uid="uid://b07yhuwx4dkdn" path="res://scenes/troop_manager/troop_manager.tscn" id="3_w2bt2"]
+[ext_resource type="PackedScene" uid="uid://ccypnmryyq73r" path="res://scenes/troop_manager/troop_factory.tscn" id="4_wjlhs"]
 [ext_resource type="PackedScene" uid="uid://dfemqxgdpiugb" path="res://scenes/troop_detector/troop_detector.tscn" id="4_x43r4"]
+[ext_resource type="PackedScene" uid="uid://cc03llx0grfnv" path="res://scenes/troop_manager/troop_tracker.tscn" id="5_ec05d"]
+[ext_resource type="PackedScene" uid="uid://dant4e2ymqfe" path="res://scenes/troop_manager/troop_commander.tscn" id="6_l36ww"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1aaa2"]
 texture = ExtResource("1_hnavn")
@@ -33,12 +35,13 @@ radius = 40.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_ewchd"]
 radius = 64.0
 
-[node name="Mine" type="Area2D" node_paths=PackedStringArray("troop_manager")]
+[node name="Mine" type="Area2D" node_paths=PackedStringArray("factory", "commander")]
 position = Vector2(-16, -16)
 collision_layer = 1024
 collision_mask = 0
 script = ExtResource("1_bdrik")
-troop_manager = NodePath("TroopManager")
+factory = NodePath("TroopFactory")
+commander = NodePath("TroopCommander")
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(8, 8)
@@ -50,10 +53,13 @@ layer_0/tile_data = PackedInt32Array(131074, 4653056, 25, 196610, 4784128, 25, 2
 position = Vector2(64, 62)
 shape = SubResource("CircleShape2D_siikp")
 
-[node name="TroopManager" parent="." instance=ExtResource("3_w2bt2")]
-position = Vector2(64, 64)
-
 [node name="TroopDetector" parent="." node_paths=PackedStringArray("owner_entity") instance=ExtResource("4_x43r4")]
 position = Vector2(64, 64)
 shape = SubResource("CircleShape2D_ewchd")
 owner_entity = NodePath("..")
+
+[node name="TroopFactory" parent="." instance=ExtResource("4_wjlhs")]
+
+[node name="TroopTracker" parent="." instance=ExtResource("5_ec05d")]
+
+[node name="TroopCommander" parent="." instance=ExtResource("6_l36ww")]
