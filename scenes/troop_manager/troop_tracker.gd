@@ -1,12 +1,9 @@
 class_name TroopTracker extends Node
 
 @export var factory: TroopFactory
-@export var initial_troops: Array[Troop] 
 var _troops: Array[Troop]
 
 func _ready() -> void:
-	# TODO: need to setup the initial_troops with hitbox and hurtbox layers depending on faction
-	#_troops.append_array(initial_troops)
 	if factory:
 		factory.troop_created.connect(add_troop)
 

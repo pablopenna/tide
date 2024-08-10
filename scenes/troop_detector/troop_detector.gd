@@ -1,5 +1,9 @@
 class_name TroopDetector extends ShapeCast2D
 
+@export var faction: FactionUtils.Faction:
+	set(value):
+		faction = value
+		collision_mask = FactionUtils.get_hitbox_collision_mask_for_faction(faction)
 @export var owner_entity: Node2D
 var default_direction: Vector2 = Vector2.RIGHT
 var current_direction: Vector2
@@ -8,6 +12,7 @@ signal targets_acquired(target_hurtbox: Array)
 
 func _ready() -> void:
 	current_direction = default_direction
+	collision_mask = FactionUtils.get_hitbox_collision_mask_for_faction(faction)
 
 func _process(delta: float) -> void:
 	_rotate_to_match_entity_direction()

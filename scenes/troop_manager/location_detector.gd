@@ -1,4 +1,4 @@
-extends Area2D
+class_name LocationDetector extends Area2D
 
 signal mine_detected(mine: Mine)
 
