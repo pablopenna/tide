@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://e16ae5mlhn1c"]
+[gd_scene load_steps=38 format=3 uid="uid://e16ae5mlhn1c"]
 
 [ext_resource type="Script" path="res://scenes/troop/knight/knight.gd" id="1_0w7wq"]
 [ext_resource type="Script" path="res://scenes/hitbox/hitbox_data.gd" id="7_lrbaa"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://scenes/troop/common/ai/GetInRange.gd" id="12_3v4wn"]
 [ext_resource type="Script" path="res://scenes/troop/knight/ai/MeleeAttack.gd" id="13_rqa38"]
 [ext_resource type="Script" path="res://scenes/troop/common/ai/FollowLeader.gd" id="14_nnw5n"]
+[ext_resource type="Script" path="res://utils/faction_container/faction_container.gd" id="15_md67d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i84y6"]
 size = Vector2(16, 16)
@@ -288,18 +289,22 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bco73"]
 size = Vector2(21.5, 4)
 
-[node name="Knight" type="CharacterBody2D" node_paths=PackedStringArray("hp_manager", "hurtbox", "hitbox")]
+[node name="Knight" type="CharacterBody2D" node_paths=PackedStringArray("faction", "hp_manager", "hurtbox", "hitbox")]
 collision_layer = 0
 collision_mask = 2
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_0w7wq")
+faction = NodePath("FactionContainer")
 hp_manager = NodePath("HealthPointsManager")
 hurtbox = NodePath("Hurtbox")
 hitbox = NodePath("Sword")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_i84y6")
+
+[node name="FactionContainer" type="Node" parent="."]
+script = ExtResource("15_md67d")
 
 [node name="HealthPointsManager" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("8_esftb")]
 hurtbox = NodePath("../Hurtbox")
@@ -322,6 +327,8 @@ libraries = {
 }
 
 [node name="Sword" type="Area2D" parent="." node_paths=PackedStringArray("troop", "sprite", "hitbox_data")]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("10_h06ut")
 troop = NodePath("..")
 sprite = NodePath("Sprite2D")
@@ -341,7 +348,7 @@ texture = ExtResource("11_5l4oe")
 
 [node name="KnightAI" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("9_p1604")
-blackboard = NodePath("@Node@50223")
+blackboard = NodePath("@Node@51785")
 actor = NodePath("..")
 
 [node name="SelectorComposite" type="Node" parent="KnightAI"]

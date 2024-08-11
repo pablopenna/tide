@@ -1,6 +1,7 @@
-[gd_scene load_steps=31 format=3 uid="uid://gu0vel5nku17"]
+[gd_scene load_steps=32 format=3 uid="uid://gu0vel5nku17"]
 
 [ext_resource type="Script" path="res://scenes/troop/archer/archer.gd" id="1_8q2fw"]
+[ext_resource type="Script" path="res://utils/faction_container/faction_container.gd" id="2_h5kpe"]
 [ext_resource type="PackedScene" uid="uid://b8yls0byl10aq" path="res://scenes/projectile/projectile_shooter.tscn" id="6_gffve"]
 [ext_resource type="PackedScene" uid="uid://vti62y788f5n" path="res://scenes/projectile/projectile.tscn" id="7_5as5o"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="8_g8m58"]
@@ -166,18 +167,22 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Archer" type="CharacterBody2D" node_paths=PackedStringArray("projectile_shooter", "hp_manager", "hurtbox")]
+[node name="Archer" type="CharacterBody2D" node_paths=PackedStringArray("projectile_shooter", "faction", "hp_manager", "hurtbox")]
 collision_layer = 0
 collision_mask = 2
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_8q2fw")
 projectile_shooter = NodePath("ProjectileShooter")
+faction = NodePath("FactionContainer")
 hp_manager = NodePath("HealthPointsManager")
 hurtbox = NodePath("Hurtbox")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_i84y6")
+
+[node name="FactionContainer" type="Node" parent="."]
+script = ExtResource("2_h5kpe")
 
 [node name="Hurtbox" parent="." instance=ExtResource("8_xja6d")]
 
@@ -204,7 +209,7 @@ entity = NodePath("..")
 
 [node name="ArcherAI" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("8_g8m58")
-blackboard = NodePath("@Node@23255")
+blackboard = NodePath("@Node@55535")
 actor = NodePath("..")
 
 [node name="SelectorComposite" type="Node" parent="ArcherAI"]

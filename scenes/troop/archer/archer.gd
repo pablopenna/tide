@@ -8,11 +8,10 @@ func _ready() -> void:
 
 func initialize_with(
 	troop_owner: Node2D, 
-	hitbox_layer: int, 
-	hurtbox_layer: int, 
 	position_offset: Vector2, 
-	speed: float
+	speed: float,
+	faction: FactionUtils.Faction
 ):
-	super.initialize_with(troop_owner, hitbox_layer, hurtbox_layer, position_offset, speed)
+	super.initialize_with(troop_owner, position_offset, speed, faction)
 	projectile_shooter.projectile_scanned_layer = hitbox_layer
 	

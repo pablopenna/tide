@@ -19,15 +19,12 @@ func create_archer():
 
 func _create_troop(troop_scene: PackedScene):
 	var new_troop: Troop = troop_scene.instantiate() as Troop
-	var hitbox_scanned_layer = FactionUtils.get_hitbox_collision_mask_for_faction(faction.faction)
-	var hurtbox_layer = FactionUtils.get_hurtbox_collision_layer_for_faction(faction.faction)
 	
 	new_troop.initialize_with(
 		troop_owner, 
-		hitbox_scanned_layer, 
-		hurtbox_layer, 
 		_generate_troop_position_offset(), 
-		_generate_troop_speed()
+		_generate_troop_speed(),
+		faction.faction
 	)
 	
 	troop_created.emit(new_troop)
