@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://fcscc842shmy"]
+
+[ext_resource type="Script" path="res://utils/cooldown/cooldown.gd" id="1_gh8r0"]
+
+[node name="Cooldown" type="Node"]
+script = ExtResource("1_gh8r0")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://caghr8ajmt6ea"]
+[gd_scene load_steps=12 format=3 uid="uid://caghr8ajmt6ea"]
 
 [ext_resource type="Script" path="res://scenes/mine/mine.gd" id="1_bdrik"]
 [ext_resource type="Texture2D" uid="uid://qmaag64jvvpr" path="res://sprites/samples/blowharder.png" id="1_hnavn"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dfemqxgdpiugb" path="res://scenes/troop_detector/troop_detector.tscn" id="4_x43r4"]
 [ext_resource type="PackedScene" uid="uid://cc03llx0grfnv" path="res://scenes/troop_manager/troop_tracker.tscn" id="5_ec05d"]
 [ext_resource type="PackedScene" uid="uid://dant4e2ymqfe" path="res://scenes/troop_manager/troop_commander.tscn" id="6_l36ww"]
+[ext_resource type="Script" path="res://utils/faction_container/faction_container.gd" id="7_h381v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1aaa2"]
 texture = ExtResource("1_hnavn")
@@ -35,16 +36,16 @@ radius = 40.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_ewchd"]
 radius = 64.0
 
-[node name="Mine" type="Area2D" node_paths=PackedStringArray("factory", "commander", "troops", "troop_detectors")]
+[node name="Mine" type="Area2D" node_paths=PackedStringArray("factory", "commander", "troops", "troop_detectors", "faction")]
 position = Vector2(-16, -16)
 collision_layer = 1024
 collision_mask = 0
 script = ExtResource("1_bdrik")
-faction = 1
 factory = NodePath("TroopFactory")
 commander = NodePath("TroopCommander")
 troops = NodePath("TroopTracker")
 troop_detectors = [NodePath("TroopDetector")]
+faction = NodePath("FactionContainer")
 initial_knights = 1
 initial_archers = 1
 
@@ -58,14 +59,15 @@ layer_0/tile_data = PackedInt32Array(131074, 4653056, 25, 196610, 4784128, 25, 2
 position = Vector2(64, 62)
 shape = SubResource("CircleShape2D_siikp")
 
-[node name="TroopDetector" parent="." node_paths=PackedStringArray("owner_entity") instance=ExtResource("4_x43r4")]
+[node name="TroopDetector" parent="." node_paths=PackedStringArray("faction", "owner_entity") instance=ExtResource("4_x43r4")]
 position = Vector2(64, 64)
 shape = SubResource("CircleShape2D_ewchd")
-faction = 1
+faction = NodePath("../FactionContainer")
 owner_entity = NodePath("..")
 
-[node name="TroopFactory" parent="." node_paths=PackedStringArray("troop_owner") instance=ExtResource("4_wjlhs")]
+[node name="TroopFactory" parent="." node_paths=PackedStringArray("troop_owner", "faction") instance=ExtResource("4_wjlhs")]
 troop_owner = NodePath("..")
+faction = NodePath("../FactionContainer")
 
 [node name="TroopTracker" parent="." node_paths=PackedStringArray("factory") instance=ExtResource("5_ec05d")]
 factory = NodePath("../TroopFactory")
@@ -73,3 +75,7 @@ factory = NodePath("../TroopFactory")
 [node name="TroopCommander" parent="." node_paths=PackedStringArray("troop_detectors", "troops") instance=ExtResource("6_l36ww")]
 troop_detectors = [NodePath("../TroopDetector")]
 troops = NodePath("../TroopTracker")
+
+[node name="FactionContainer" type="Node" parent="."]
+script = ExtResource("7_h381v")
+faction = 1

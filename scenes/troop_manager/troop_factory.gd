@@ -1,7 +1,7 @@
 class_name TroopFactory extends Node
 
 @export var troop_owner: Node2D
-@export var faction: FactionUtils.Faction
+@export var faction: FactionContainer
 @export var knight_scene: PackedScene
 @export var archer_scene: PackedScene
 
@@ -19,8 +19,8 @@ func create_archer():
 
 func _create_troop(troop_scene: PackedScene):
 	var new_troop: Troop = troop_scene.instantiate() as Troop
-	var hitbox_scanned_layer = FactionUtils.get_hitbox_collision_mask_for_faction(faction)
-	var hurtbox_layer = FactionUtils.get_hurtbox_collision_layer_for_faction(faction)
+	var hitbox_scanned_layer = FactionUtils.get_hitbox_collision_mask_for_faction(faction.faction)
+	var hurtbox_layer = FactionUtils.get_hurtbox_collision_layer_for_faction(faction.faction)
 	
 	new_troop.initialize_with(
 		troop_owner, 

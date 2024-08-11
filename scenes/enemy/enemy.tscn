@@ -46,6 +46,5 @@ factory = NodePath("../TroopFactory")
 
 [node name="TroopFactory" parent="." node_paths=PackedStringArray("troop_owner") instance=ExtResource("7_o7brj")]
 troop_owner = NodePath("..")
-faction = 1
 
 [node name="LocationHandler" parent="." instance=ExtResource("9_628ji")]

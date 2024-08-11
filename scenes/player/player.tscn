@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cmxyconummrk8"]
+[gd_scene load_steps=19 format=3 uid="uid://cmxyconummrk8"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_n50c0"]
 [ext_resource type="Texture2D" uid="uid://bqtqodwl8bqmd" path="res://sprites/playerv2.png" id="2_x0ljm"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://dant4e2ymqfe" path="res://scenes/troop_manager/troop_commander.tscn" id="9_d5esl"]
 [ext_resource type="PackedScene" uid="uid://cus6nroawtds1" path="res://scenes/troop_manager/location_detector.tscn" id="10_8tljl"]
 [ext_resource type="PackedScene" uid="uid://ccypnmryyq73r" path="res://scenes/troop_manager/troop_factory.tscn" id="10_h3u77"]
+[ext_resource type="PackedScene" uid="uid://cuajyfw6p8yi4" path="res://scenes/troop_manager/location_handler.tscn" id="11_4j7qf"]
+[ext_resource type="PackedScene" uid="uid://dgvl6kyt054rf" path="res://utils/faction_container/faction_container.tscn" id="12_7yrwf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_od5lt"]
 size = Vector2(16, 16)
@@ -115,14 +117,16 @@ hframes = 9
 script = ExtResource("3_u4ihy")
 entity = NodePath("..")
 
-[node name="TroopDetector" parent="." node_paths=PackedStringArray("owner_entity") instance=ExtResource("6_r46j7")]
+[node name="TroopDetector" parent="." node_paths=PackedStringArray("faction", "owner_entity") instance=ExtResource("6_r46j7")]
 shape = ExtResource("7_gg1ut")
 collision_mask = 512
+faction = NodePath("../FactionContainer")
 owner_entity = NodePath("..")
 
-[node name="TroopDetector2" parent="." node_paths=PackedStringArray("owner_entity") instance=ExtResource("6_r46j7")]
+[node name="TroopDetector2" parent="." node_paths=PackedStringArray("faction", "owner_entity") instance=ExtResource("6_r46j7")]
 shape = ExtResource("8_3rp2t")
 collision_mask = 512
+faction = NodePath("../FactionContainer")
 owner_entity = NodePath("..")
 
 [node name="TroopTracker" parent="." node_paths=PackedStringArray("factory") instance=ExtResource("8_mux8n")]
@@ -132,7 +136,15 @@ factory = NodePath("../TroopFactory")
 troop_detectors = [NodePath("../TroopDetector"), NodePath("../TroopDetector2")]
 troops = NodePath("../TroopTracker")
 
-[node name="TroopFactory" parent="." node_paths=PackedStringArray("troop_owner") instance=ExtResource("10_h3u77")]
+[node name="TroopFactory" parent="." node_paths=PackedStringArray("troop_owner", "faction") instance=ExtResource("10_h3u77")]
 troop_owner = NodePath("..")
+faction = NodePath("../FactionContainer")
 
 [node name="LocationDetector" parent="." instance=ExtResource("10_8tljl")]
+
+[node name="LocationHandler" parent="." node_paths=PackedStringArray("location_detector", "troops", "faction") instance=ExtResource("11_4j7qf")]
+location_detector = NodePath("../LocationDetector")
+troops = NodePath("../TroopTracker")
+faction = NodePath("../FactionContainer")
+
+[node name="FactionContainer" parent="." instance=ExtResource("12_7yrwf")]

@@ -20,3 +20,6 @@ func get_all_troops() -> Array[Troop]:
 
 func pop_troop() -> Troop:
 	return _troops.pop_back()
+	
+func get_number_of_troops() -> int:
+	return len(_troops)
