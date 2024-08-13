@@ -5,9 +5,11 @@ var input: Vector2
 @export var commander: TroopCommander
 @export var factory: TroopFactory
 @export var animation_player: AnimationPlayer
+@export var player_mana: Mana
 
 func _ready() -> void:
 	input = Vector2.ZERO
+	player_mana.mana_changed.connect(func(amount: int): GlobalEvents.player_mana_changed.emit(amount))
 
 func _process(_delta: float) -> void:
 	_process_input()
@@ -19,9 +21,11 @@ func _process_input() -> void:
 	input = raw_input.normalized()
 	
 	if Input.is_action_just_pressed("player_troop_add_knight"):
-		factory.create_knight()
+		if player_mana.spend(1):
+			factory.create_knight()
 	if Input.is_action_just_pressed("player_troop_add_archer"):
-		factory.create_archer()
+		if player_mana.spend(1):
+			factory.create_archer()
 	if Input.is_action_just_pressed("player_troop_regroup"):
 		commander.make_troops_follow_leader()
 

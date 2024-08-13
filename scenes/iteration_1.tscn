@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://47rmp8lps1ab"]
+[gd_scene load_steps=9 format=3 uid="uid://47rmp8lps1ab"]
 
 [ext_resource type="Texture2D" uid="uid://qmaag64jvvpr" path="res://sprites/samples/blowharder.png" id="1_ew4o8"]
 [ext_resource type="PackedScene" uid="uid://cmxyconummrk8" path="res://scenes/player/player.tscn" id="2_7f3yg"]
 [ext_resource type="PackedScene" uid="uid://caghr8ajmt6ea" path="res://scenes/mine/mine.tscn" id="2_dlk2k"]
+[ext_resource type="PackedScene" uid="uid://bgdfifq1katr5" path="res://scenes/ui/in_game_ui.tscn" id="4_r57kl"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_r8b5r"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -224,3 +225,5 @@ layer_0/tile_data = PackedInt32Array(589856, 5046272, 16, 589857, 5046272, 16, 6
 
 [node name="Player" parent="TileMap" instance=ExtResource("2_7f3yg")]
 position = Vector2(185, 366)
+
+[node name="InGameUi" parent="." instance=ExtResource("4_r57kl")]

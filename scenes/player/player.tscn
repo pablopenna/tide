@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cmxyconummrk8"]
+[gd_scene load_steps=20 format=3 uid="uid://cmxyconummrk8"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_n50c0"]
 [ext_resource type="Texture2D" uid="uid://bqtqodwl8bqmd" path="res://sprites/playerv2.png" id="2_x0ljm"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://ccypnmryyq73r" path="res://scenes/troop_manager/troop_factory.tscn" id="10_h3u77"]
 [ext_resource type="PackedScene" uid="uid://cuajyfw6p8yi4" path="res://scenes/troop_manager/location_handler.tscn" id="11_4j7qf"]
 [ext_resource type="PackedScene" uid="uid://dgvl6kyt054rf" path="res://utils/faction_container/faction_container.tscn" id="12_7yrwf"]
+[ext_resource type="PackedScene" uid="uid://cayyyalepwf0i" path="res://scenes/mana/mana.tscn" id="13_bfqgg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_od5lt"]
 size = Vector2(16, 16)
@@ -94,7 +95,7 @@ _data = {
 "walk_up": SubResource("Animation_gsebh")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("commander", "factory", "animation_player")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("commander", "factory", "animation_player", "player_mana")]
 collision_mask = 10
 motion_mode = 1
 wall_min_slide_angle = 0.0
@@ -102,6 +103,7 @@ script = ExtResource("1_n50c0")
 commander = NodePath("TroopCommander")
 factory = NodePath("TroopFactory")
 animation_player = NodePath("AnimationPlayer")
+player_mana = NodePath("Mana")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_od5lt")
@@ -148,3 +150,5 @@ troops = NodePath("../TroopTracker")
 faction = NodePath("../FactionContainer")
 
 [node name="FactionContainer" parent="." instance=ExtResource("12_7yrwf")]
+
+[node name="Mana" parent="." instance=ExtResource("13_bfqgg")]

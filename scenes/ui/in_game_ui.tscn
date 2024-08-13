@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://bgdfifq1katr5"]
+
+[ext_resource type="Script" path="res://scenes/ui/mana_bar.gd" id="1_05hfs"]
+
+[sub_resource type="Curve" id="Curve_kr371"]
+_data = [Vector2(1, 5), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_e46he"]
+_data = [Vector2(0.609375, 0.868132), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_g582x"]
+width = 255
+curve_x = SubResource("Curve_kr371")
+curve_y = SubResource("Curve_e46he")
+
+[node name="InGameUi" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ManaBar" type="TextureProgressBar" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -10.0
+offset_right = 128.0
+grow_horizontal = 2
+grow_vertical = 0
+value = 100.0
+texture_progress = SubResource("CurveXYZTexture_g582x")
+tint_under = Color(0.331932, 1, 0.877962, 1)
+tint_over = Color(1, 0, 1, 1)
+tint_progress = Color(1, 1, 0, 1)
+script = ExtResource("1_05hfs")
