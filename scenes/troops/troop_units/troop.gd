@@ -28,6 +28,7 @@ signal died(troop: Troop)
 signal ordered_to_attack(target: Node2D)
 signal ordered_to_follow_leader
 signal _provide_damage(damage:int)
+signal _provide_base_hp(hp:int)
 
 func _ready() -> void:
 	hp_manager.health_zeroed.connect(_on_die)
@@ -37,6 +38,7 @@ func _init_stats() -> void:
 	self.stats = TroopStats.stats[troop_type]
 	self.speed = randf_range(stats.min_speed, stats.max_speed)
 	_provide_damage.emit(stats.damage)
+	_provide_base_hp.emit(stats.hp)
 
 func initialize_with(troop_owner: Node2D, position_offset: Vector2, faction: FactionUtils.Faction) -> void:
 	self.faction.faction = faction

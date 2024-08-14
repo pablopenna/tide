@@ -4,6 +4,7 @@ class_name TroopFactory extends Node
 @export var faction: FactionContainer
 @export var knight_scene: PackedScene
 @export var archer_scene: PackedScene
+@export var dragon_scene: PackedScene
 
 @export var troop_spread_radius = 50
 
@@ -14,6 +15,9 @@ func create_knight():
 
 func create_archer():
 	_create_troop(archer_scene)
+
+func create_dragon():
+	_create_troop(dragon_scene)
 
 func _create_troop(troop_scene: PackedScene):
 	var new_troop: Troop = troop_scene.instantiate() as Troop

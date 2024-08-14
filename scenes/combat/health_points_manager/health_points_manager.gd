@@ -18,3 +18,6 @@ func _on_hurtbox_triggered(damage: int):
 	health_decreased.emit(new_health, initial_health)
 	if self.health <= 0:
 		health_zeroed.emit()
+
+func _set_hp(hp:int) -> void:
+	self.health = hp

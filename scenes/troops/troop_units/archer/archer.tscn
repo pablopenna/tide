@@ -11,9 +11,9 @@
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="9_0l7tj"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="10_74826"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="11_he7tf"]
-[ext_resource type="Script" path="res://scenes/troops/troop_units/common/ai/GetInRange.gd" id="12_3aupo"]
-[ext_resource type="Script" path="res://scenes/troops/troop_units/archer/ai/Shoot.gd" id="13_qd04a"]
-[ext_resource type="Script" path="res://scenes/troops/troop_units/common/ai/FollowLeader.gd" id="14_bk7wr"]
+[ext_resource type="Script" path="res://scenes/troops/ai/GetInRange.gd" id="12_3aupo"]
+[ext_resource type="Script" path="res://scenes/troops/ai/Shoot.gd" id="13_qd04a"]
+[ext_resource type="Script" path="res://scenes/troops/ai/FollowLeader.gd" id="14_bk7wr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i84y6"]
 size = Vector2(16, 16)
@@ -209,7 +209,7 @@ entity = NodePath("..")
 
 [node name="ArcherAI" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("9_0l7tj")
-blackboard = NodePath("@Node@35832")
+blackboard = NodePath("@Node@25986")
 actor = NodePath("..")
 
 [node name="SelectorComposite" type="Node" parent="ArcherAI"]
@@ -229,3 +229,5 @@ projectile_shooter = NodePath("../../../../ProjectileShooter")
 [node name="FollowLeader" type="Node" parent="ArcherAI/SelectorComposite" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("14_bk7wr")
 animation_player = NodePath("../../../AnimationPlayer")
+
+[connection signal="_provide_base_hp" from="." to="HealthPointsManager" method="_set_hp"]

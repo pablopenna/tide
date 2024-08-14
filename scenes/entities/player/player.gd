@@ -21,11 +21,14 @@ func _process_input() -> void:
 	input = raw_input.normalized()
 	
 	if Input.is_action_just_pressed("player_troop_add_knight"):
-		if player_mana.spend(1):
+		if player_mana.spend(TroopStats.stats[TroopTypes.Type.KNIGHT].mana_cost):
 			factory.create_knight()
 	if Input.is_action_just_pressed("player_troop_add_archer"):
-		if player_mana.spend(1):
+		if player_mana.spend(TroopStats.stats[TroopTypes.Type.ARCHER].mana_cost):
 			factory.create_archer()
+	if Input.is_action_just_pressed("player_troop_add_dragon"):
+		if player_mana.spend(TroopStats.stats[TroopTypes.Type.DRAGON].mana_cost):
+			factory.create_dragon()
 	if Input.is_action_just_pressed("player_troop_regroup"):
 		commander.make_troops_follow_leader()
 

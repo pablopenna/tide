@@ -11,9 +11,9 @@
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="9_c5cdg"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="10_2ts8o"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="11_ctcji"]
-[ext_resource type="Script" path="res://scenes/troops/troop_units/common/ai/GetInRange.gd" id="12_ew661"]
-[ext_resource type="Script" path="res://scenes/troops/troop_units/knight/ai/MeleeAttack.gd" id="13_byvlc"]
-[ext_resource type="Script" path="res://scenes/troops/troop_units/common/ai/FollowLeader.gd" id="14_l1eax"]
+[ext_resource type="Script" path="res://scenes/troops/ai/GetInRange.gd" id="12_ew661"]
+[ext_resource type="Script" path="res://scenes/troops/ai/MeleeAttack.gd" id="13_byvlc"]
+[ext_resource type="Script" path="res://scenes/troops/ai/FollowLeader.gd" id="14_l1eax"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i84y6"]
 size = Vector2(16, 16)
@@ -342,7 +342,7 @@ texture = ExtResource("8_ir4ht")
 
 [node name="KnightAI" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("9_c5cdg")
-blackboard = NodePath("@Node@37950")
+blackboard = NodePath("@Node@42617")
 actor = NodePath("..")
 
 [node name="SelectorComposite" type="Node" parent="KnightAI"]
@@ -364,5 +364,6 @@ sword = NodePath("../../../../Sword")
 script = ExtResource("14_l1eax")
 animation_player = NodePath("../../../AnimationPlayer")
 
+[connection signal="_provide_base_hp" from="." to="HealthPointsManager" method="_set_hp"]
 [connection signal="_provide_damage" from="." to="Sword" method="_set_damage"]
 [connection signal="damaged" from="Hurtbox" to="." method="_on_hurtbox_damaged"]
