@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cus6nroawtds1"]
+
+[ext_resource type="Script" path="res://scenes/troops/troop_manager/location_detector.gd" id="1_xfub1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gbxlv"]
+radius = 32.0
+
+[node name="LocationDetector" type="Area2D" node_paths=PackedStringArray("active_scan_timer")]
+collision_layer = 0
+collision_mask = 1024
+script = ExtResource("1_xfub1")
+active_scan_timer = NodePath("ActiveScanTimer")
+
+[node name="LocationHandlerShape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gbxlv")
+
+[node name="ActiveScanTimer" type="Timer" parent="."]
+autostart = true

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cuajyfw6p8yi4"]
-
-[ext_resource type="Script" path="res://scenes/troop_manager/location_handler.gd" id="1_8cq1g"]
-
-[node name="LocationHandler" type="Node"]
-script = ExtResource("1_8cq1g")

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwh3ymoxbgi4h"]
-
-[ext_resource type="Script" path="res://scenes/health_points_manager/health_points_manager.gd" id="1_b7nh0"]
-
-[node name="HealthPointsManager" type="Node"]
-script = ExtResource("1_b7nh0")

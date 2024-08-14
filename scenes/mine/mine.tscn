@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://scenes/mine/mine.gd" id="1_bdrik"]
 [ext_resource type="Texture2D" uid="uid://qmaag64jvvpr" path="res://sprites/samples/blowharder.png" id="1_hnavn"]
-[ext_resource type="PackedScene" uid="uid://ccypnmryyq73r" path="res://scenes/troop_manager/troop_factory.tscn" id="4_wjlhs"]
-[ext_resource type="PackedScene" uid="uid://dfemqxgdpiugb" path="res://scenes/troop_detector/troop_detector.tscn" id="4_x43r4"]
-[ext_resource type="PackedScene" uid="uid://cc03llx0grfnv" path="res://scenes/troop_manager/troop_tracker.tscn" id="5_ec05d"]
-[ext_resource type="PackedScene" uid="uid://dant4e2ymqfe" path="res://scenes/troop_manager/troop_commander.tscn" id="6_l36ww"]
+[ext_resource type="PackedScene" uid="uid://ccypnmryyq73r" path="res://scenes/troops/troop_manager/troop_factory.tscn" id="4_wjlhs"]
+[ext_resource type="PackedScene" uid="uid://dfemqxgdpiugb" path="res://scenes/troops/troop_detector/troop_detector.tscn" id="4_x43r4"]
+[ext_resource type="PackedScene" uid="uid://cc03llx0grfnv" path="res://scenes/troops/troop_manager/troop_tracker.tscn" id="5_ec05d"]
+[ext_resource type="PackedScene" uid="uid://dant4e2ymqfe" path="res://scenes/troops/troop_manager/troop_commander.tscn" id="6_l36ww"]
 [ext_resource type="Script" path="res://utils/faction_container/faction_container.gd" id="7_h381v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1aaa2"]

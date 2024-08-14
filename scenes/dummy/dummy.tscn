@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/dummy/dummy.gd" id="1_72h5p"]
 [ext_resource type="Texture2D" uid="uid://di0boo8jtpvth" path="res://sprites/enemy.png" id="2_8scon"]
-[ext_resource type="PackedScene" uid="uid://m4h80v367bd7" path="res://scenes/hurtbox/hurtbox.tscn" id="3_v03rl"]
+[ext_resource type="PackedScene" uid="uid://m4h80v367bd7" path="res://scenes/combat/hurtbox/hurtbox.tscn" id="3_v03rl"]
 [ext_resource type="Script" path="res://states/state_manager.gd" id="4_k16vv"]
 [ext_resource type="Script" path="res://scenes/dummy/states/default_state.gd" id="5_xe6dm"]
 

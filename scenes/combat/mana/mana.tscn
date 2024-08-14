@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cayyyalepwf0i"]
+
+[ext_resource type="Script" path="res://scenes/combat/mana/mana.gd" id="1_ctbw5"]
+
+[node name="Mana" type="Node" node_paths=PackedStringArray("mana_regen_timer")]
+script = ExtResource("1_ctbw5")
+max_mana_points = 100
+mana_regen_quantity = 1
+mana_regen_cooldown = 1.0
+mana_regen_timer = NodePath("ManaRegenCooldown")
+
+[node name="ManaRegenCooldown" type="Timer" parent="."]
