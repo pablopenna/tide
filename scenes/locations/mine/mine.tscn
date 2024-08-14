@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://caghr8ajmt6ea"]
 
-[ext_resource type="Script" path="res://scenes/mine/mine.gd" id="1_bdrik"]
+[ext_resource type="Script" path="res://scenes/locations/mine/mine.gd" id="1_bdrik"]
 [ext_resource type="Texture2D" uid="uid://qmaag64jvvpr" path="res://sprites/samples/blowharder.png" id="1_hnavn"]
 [ext_resource type="PackedScene" uid="uid://ccypnmryyq73r" path="res://scenes/troops/troop_manager/troop_factory.tscn" id="4_wjlhs"]
 [ext_resource type="PackedScene" uid="uid://dfemqxgdpiugb" path="res://scenes/troops/troop_detector/troop_detector.tscn" id="4_x43r4"]

@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b8yls0byl10aq" path="res://scenes/combat/projectile/projectile_shooter.tscn" id="5_jrmpe"]
 [ext_resource type="PackedScene" uid="uid://vti62y788f5n" path="res://scenes/combat/projectile/projectile.tscn" id="6_7r3k1"]
 [ext_resource type="Texture2D" uid="uid://qmaag64jvvpr" path="res://sprites/samples/blowharder.png" id="7_khoe8"]
-[ext_resource type="Script" path="res://scenes/entity/animated_sprite_rotating_with_face_direction.gd" id="8_mohk7"]
+[ext_resource type="Script" path="res://scenes/entities/base/animated_sprite_rotating_with_face_direction.gd" id="8_w2vcu"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="9_0l7tj"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="10_74826"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="11_he7tf"]
@@ -204,12 +204,12 @@ libraries = {
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("entity")]
 sprite_frames = SubResource("SpriteFrames_yyko6")
 frame = 3
-script = ExtResource("8_mohk7")
+script = ExtResource("8_w2vcu")
 entity = NodePath("..")
 
 [node name="ArcherAI" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("9_0l7tj")
-blackboard = NodePath("@Node@19497")
+blackboard = NodePath("@Node@35832")
 actor = NodePath("..")
 
 [node name="SelectorComposite" type="Node" parent="ArcherAI"]

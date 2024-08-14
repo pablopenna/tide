@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bwh3ymoxbgi4h" path="res://scenes/combat/health_points_manager/health_points_manager.tscn" id="3_5o6x8"]
 [ext_resource type="PackedScene" uid="uid://m4h80v367bd7" path="res://scenes/combat/hurtbox/hurtbox.tscn" id="4_r4c2p"]
 [ext_resource type="Texture2D" uid="uid://qmaag64jvvpr" path="res://sprites/samples/blowharder.png" id="5_qdpgj"]
-[ext_resource type="Script" path="res://scenes/entity/animated_sprite_rotating_with_face_direction.gd" id="6_u0f85"]
+[ext_resource type="Script" path="res://scenes/entities/base/animated_sprite_rotating_with_face_direction.gd" id="6_d6pjr"]
 [ext_resource type="Script" path="res://scenes/troops/troop_units/knight/sword.gd" id="7_hhtmt"]
 [ext_resource type="Texture2D" uid="uid://cvjolimoccm8o" path="res://sprites/sword.png" id="8_ir4ht"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="9_c5cdg"]
@@ -317,7 +317,7 @@ shape = SubResource("RectangleShape2D_y572c")
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("entity")]
 sprite_frames = SubResource("SpriteFrames_dho33")
 frame = 1
-script = ExtResource("6_u0f85")
+script = ExtResource("6_d6pjr")
 entity = NodePath("..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -342,7 +342,7 @@ texture = ExtResource("8_ir4ht")
 
 [node name="KnightAI" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("9_c5cdg")
-blackboard = NodePath("@Node@20625")
+blackboard = NodePath("@Node@37950")
 actor = NodePath("..")
 
 [node name="SelectorComposite" type="Node" parent="KnightAI"]

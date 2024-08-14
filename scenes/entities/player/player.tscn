@@ -1,8 +1,8 @@
 [gd_scene load_steps=20 format=3 uid="uid://cmxyconummrk8"]
 
-[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_n50c0"]
+[ext_resource type="Script" path="res://scenes/entities/player/player.gd" id="1_n50c0"]
 [ext_resource type="Texture2D" uid="uid://bqtqodwl8bqmd" path="res://sprites/playerv2.png" id="2_x0ljm"]
-[ext_resource type="Script" path="res://scenes/entity/sprite_rotating_with_face_direction.gd" id="3_u4ihy"]
+[ext_resource type="Script" path="res://scenes/entities/base/sprite_rotating_with_face_direction.gd" id="3_u4ihy"]
 [ext_resource type="PackedScene" uid="uid://dfemqxgdpiugb" path="res://scenes/troops/troop_detector/troop_detector.tscn" id="6_r46j7"]
 [ext_resource type="Shape2D" uid="uid://cwk0rjafs6j5e" path="res://scenes/troops/troop_detector/cone.tres" id="7_gg1ut"]
 [ext_resource type="Shape2D" uid="uid://chmhxpv1tkndp" path="res://scenes/troops/troop_detector/circle.tres" id="8_3rp2t"]

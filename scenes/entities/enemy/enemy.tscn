@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://ctixulb3yg747"]
 
-[ext_resource type="Script" path="res://scenes/enemy/enemy.gd" id="1_5m6ue"]
+[ext_resource type="Script" path="res://scenes/entities/enemy/enemy.gd" id="1_5m6ue"]
 [ext_resource type="Texture2D" uid="uid://di0boo8jtpvth" path="res://sprites/enemy.png" id="2_ja4re"]
 [ext_resource type="PackedScene" uid="uid://dfemqxgdpiugb" path="res://scenes/troops/troop_detector/troop_detector.tscn" id="4_k6yqj"]
 [ext_resource type="Shape2D" uid="uid://chmhxpv1tkndp" path="res://scenes/troops/troop_detector/circle.tres" id="5_8t5rd"]
