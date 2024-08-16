@@ -106,6 +106,7 @@ animation_player = NodePath("AnimationPlayer")
 player_mana = NodePath("Mana")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_od5lt")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -114,6 +115,7 @@ libraries = {
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="." node_paths=PackedStringArray("entity")]
+position = Vector2(0, -8)
 texture = ExtResource("2_x0ljm")
 hframes = 9
 script = ExtResource("3_u4ihy")
@@ -152,3 +154,5 @@ faction = NodePath("../FactionContainer")
 [node name="FactionContainer" parent="." instance=ExtResource("12_7yrwf")]
 
 [node name="Mana" parent="." instance=ExtResource("13_bfqgg")]
+initial_mana_points = 100
+mana_regen_quantity = 100

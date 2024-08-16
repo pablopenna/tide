@@ -300,6 +300,7 @@ hurtbox = NodePath("Hurtbox")
 hitbox = NodePath("Sword")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_i84y6")
 
 [node name="FactionContainer" type="Node" parent="."]
@@ -312,9 +313,11 @@ health = 40
 [node name="Hurtbox" parent="." instance=ExtResource("4_r4c2p")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_y572c")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("entity")]
+position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_dho33")
 frame = 1
 script = ExtResource("6_d6pjr")
@@ -326,6 +329,7 @@ libraries = {
 }
 
 [node name="Sword" type="Area2D" parent="." node_paths=PackedStringArray("troop", "sprite")]
+position = Vector2(0, -8)
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("7_hhtmt")
@@ -342,7 +346,7 @@ texture = ExtResource("8_ir4ht")
 
 [node name="KnightAI" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("9_c5cdg")
-blackboard = NodePath("@Node@42617")
+blackboard = NodePath("@Node@17272")
 actor = NodePath("..")
 
 [node name="SelectorComposite" type="Node" parent="KnightAI"]

@@ -179,6 +179,7 @@ hp_manager = NodePath("HealthPointsManager")
 hurtbox = NodePath("Hurtbox")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_i84y6")
 
 [node name="FactionContainer" type="Node" parent="."]
@@ -187,6 +188,7 @@ script = ExtResource("2_cgvmi")
 [node name="Hurtbox" parent="." instance=ExtResource("3_p4xck")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_y572c")
 
 [node name="HealthPointsManager" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("4_7ya7r")]
@@ -202,6 +204,7 @@ libraries = {
 }
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("entity")]
+position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_yyko6")
 frame = 3
 script = ExtResource("8_w2vcu")
@@ -209,7 +212,7 @@ entity = NodePath("..")
 
 [node name="ArcherAI" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("9_0l7tj")
-blackboard = NodePath("@Node@25986")
+blackboard = NodePath("@Node@17269")
 actor = NodePath("..")
 
 [node name="SelectorComposite" type="Node" parent="ArcherAI"]
