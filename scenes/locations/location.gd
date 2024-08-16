@@ -13,7 +13,7 @@ class_name Location extends Area2D
 
 
 func _ready():
-	_create_initial_troops()
+	call_deferred("_create_initial_troops")
 
 func _create_initial_troops() -> void:
 	for i:int in range(initial_knights):
@@ -32,7 +32,3 @@ func conquer(faction: FactionUtils.Faction) -> bool:
 	conquer_cooldown.trigger()
 	factory.create_knight.call_deferred()
 	return true
-
-
-
-

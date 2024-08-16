@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://caghr8ajmt6ea"]
+[gd_scene load_steps=12 format=4 uid="uid://caghr8ajmt6ea"]
 
 [ext_resource type="Script" path="res://scenes/locations/mine/mine.gd" id="1_bdrik"]
 [ext_resource type="Texture2D" uid="uid://qmaag64jvvpr" path="res://sprites/samples/blowharder.png" id="1_hnavn"]
@@ -34,9 +34,10 @@ sources/0 = SubResource("TileSetAtlasSource_1aaa2")
 radius = 40.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ewchd"]
-radius = 64.0
+radius = 226.22
 
 [node name="Mine" type="Area2D" node_paths=PackedStringArray("factory", "commander", "troops", "troop_detectors", "faction")]
+z_index = 1
 position = Vector2(-16, -16)
 collision_layer = 1024
 collision_mask = 0
@@ -46,21 +47,19 @@ commander = NodePath("TroopCommander")
 troops = NodePath("TroopTracker")
 troop_detectors = [NodePath("TroopDetector")]
 faction = NodePath("FactionContainer")
-initial_knights = 1
-initial_archers = 1
+initial_knights = 10
+initial_archers = 10
 
-[node name="TileMap" type="TileMap" parent="."]
-position = Vector2(8, 8)
+[node name="TileMap" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD/////AABJABkAAAD//wAAAABKABgAAAD//wEAAABKABkAAAAAAP//AABKABkAAAAAAAAAAABJABgAAAAAAAEAAABKABkAAAABAP//AABJABkAAAABAAAAAABJABgAAAABAAEAAABJABkAAAD///7/AABJABgAAAAAAP7/AABKABgAAAABAP7/AABJABgAAAACAP7/AABKABgAAAD+//7/AABKABgAAAACAP//AABKABkAAAD9//7/AABGABgAAAD9////AABGABkAAAD+////AABKABkAAAD+/wAAAABKABgAAAD+/wEAAABKABkAAAACAAAAAABKABgAAAACAAEAAABKABkAAAD9/wAAAABGABkAAAD9/wEAAABGABoAAAADAP//AABIABkAAAADAAAAAABIABkAAAADAP7/AABIABgAAAADAAEAAABIABoAAAD//wIAAABHABoAAAAAAAIAAABHABoAAAABAAIAAABHABoAAAACAAIAAABIABoAAAD+/wIAAABGABoAAAADAAIAAABFABgAAAD9/wIAAABFABgAAAD///3/AABHABgAAAAAAP3/AABHABgAAAABAP3/AABHABgAAAACAP3/AABIABgAAAD+//3/AABGABgAAAD9//3/AABFABgAAAADAP3/AABFABgAAAD9//z/AABFABkAAAD+//z/AABFABkAAAD///z/AABFABkAAAAAAPz/AABFABkAAAABAPz/AABFABkAAAACAPz/AABFABkAAAADAPz/AABFABkAAAAEAPz/AABFABkAAAD8//z/AABFABkAAAD8//3/AABFABkAAAD8//7/AABFABkAAAD8////AABFABkAAAD8/wAAAABFABkAAAD8/wEAAABFABkAAAD8/wIAAABFABkAAAD8/wMAAABFABkAAAD9/wMAAABFABkAAAD+/wMAAABFABkAAAD//wMAAABFABkAAAAAAAMAAABFABkAAAABAAMAAABFABkAAAACAAMAAABFABkAAAADAAMAAABFABkAAAAEAAMAAABFABkAAAAEAP3/AABFABkAAAAEAP7/AABFABkAAAAEAP//AABFABkAAAAEAAAAAABFABkAAAAEAAEAAABFABkAAAAEAAIAAABFABkAAAA=")
 tile_set = SubResource("TileSet_5pwyh")
-format = 2
-layer_0/tile_data = PackedInt32Array(131074, 4653056, 25, 196610, 4784128, 25, 262146, 4784128, 25, 131075, 4784128, 25, 196611, 4784128, 25, 262147, 4849664, 24, 131076, 4849664, 24, 196612, 4653056, 25, 262148, 4784128, 24, 131073, 4587520, 25, 196609, 4587520, 25, 262145, 4587520, 25, 327681, 4587520, 26, 327682, 4653056, 26, 327683, 4653056, 26, 327684, 4653056, 26, 327685, 4718592, 26, 262149, 4718592, 25, 196613, 4718592, 25, 131077, 4718592, 25, 65540, 4653056, 24, 65539, 4653056, 24, 65538, 4653056, 24, 65537, 4587520, 24, 65541, 4718592, 24, 0, 4521984, 24, 65536, 4521984, 26, 131072, 4521984, 25, 196608, 4521984, 26, 262144, 4521984, 24, 327680, 4521984, 24, 393216, 4521984, 26, 393217, 4521984, 25, 393218, 4521984, 25, 393219, 4521984, 25, 393220, 4521984, 25, 393221, 4521984, 24, 393222, 4521984, 26, 327686, 4521984, 24, 262150, 4521984, 26, 196614, 4521984, 26, 131078, 4521984, 25, 65542, 4521984, 25, 6, 4521984, 26, 5, 4521984, 24, 4, 4521984, 25, 3, 4521984, 24, 2, 4521984, 26, 1, 4521984, 24)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(64, 62)
+position = Vector2(10, -1)
 shape = SubResource("CircleShape2D_siikp")
 
 [node name="TroopDetector" parent="." node_paths=PackedStringArray("faction", "owner_entity") instance=ExtResource("4_x43r4")]
-position = Vector2(64, 64)
+position = Vector2(16, 6)
 shape = SubResource("CircleShape2D_ewchd")
 faction = NodePath("../FactionContainer")
 owner_entity = NodePath("..")
